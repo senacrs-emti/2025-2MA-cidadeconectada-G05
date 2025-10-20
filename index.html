@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,25 +52,25 @@
 
             <form id="food-form">
                 <div class="slider-container">
-                   
+                    
                         <span>NUNCA</span>
                           <input type="range" id="meat-frequency" min="0" max="100" value="75" step="1" oninput="updateMeatLabel(this.value)">
                     <div class="labels"><span>MUITO FREQUENTEMENTE</span>
 
                     
-                       
+                        
                     </div>
                     <input type="radio" name="frequency" id="frequency"><p id="meat-label">
-                        <p> frequentemente (carne diariamente)</p>
+                         <p> frequentemente (carne diariamente)</p>
                 </div>
                 
                 <button type="button" onclick="nextStep('food')">Próxima Etapa</button>
             </form>
         </div>
-         <div id="step-food" class="quiz-step hidden-step">
+        <div id="step-food" class="quiz-step hidden-step"> 
             <p class="section-title">ALIMENTAÇÃO</p>
-            <h1>Dos alimentos que você consome qual porcentagem de comida  não embalada não processada ou cultivada localmente. </h1>
-             
+            <h1>Dos alimentos que você consome qual porcentagem de comida  não embalada não processada ou cultivada localmente. </h1>
+             
     <p class="subtexto">(menos de 320 km de distância)</p>
     <div class="slider-container">
         <div class="labels">
@@ -89,11 +88,11 @@
                 <div class="slider-container">
                 
                     
-                       
+                        
                     
                 
-                <button type="button" onclick="nextStep('food')">Próxima Etapa</button>
-                 <div id="step-housing" class="quiz-step active-step">
+                <button type="button" onclick="nextStep('food-local')">Próxima Etapa</button>
+                <div id="step-housing" class="quiz-step active-step"> 
             <h1>Qual material é construida sua casa?</h1>
 
             <form id="housing-form">
@@ -119,17 +118,31 @@
 
 
                 
-
-                <h1>Tem energia elétrica na sua casa?</h1>
-                <p> SIM </p>  <p>NÃO</p>
-
+                <div id="step-energy" class="quiz-step hidden-step">
+                    <h1>Tem energia elétrica na sua casa?</h1>
+                    <form id="energy-form">
+                        <input type="checkbox" id="energy-toggle" name="energy-presence" value="sim" onchange="updateEnergyValue(this)">
+                        
+                        <label for="energy-toggle">
+                            <span class="slider round"></span>
+                        </label>
+                        
+                        <p>Estado: <span id="energy-status-label" style="font-weight: bold;">NÃO</span></p>
+                
+                        <button type="button" onclick="nextStep('energy')">Próxima Etapa</button>
+                    </form>
+                </div>
 
             </form>
         </div>
 
         <div id="step-result" class="quiz-step hidden-step">
             <h1>Sua Pegada de Carbono Anual é:</h1>
-            <p id="final-result">Calculando...</p>
+            
+            <p>Resultado: <span id="final-result" style="color: darkgreen; font-weight: bold; font-size: 1.2em;">Calculando...</span></p> 
+            
+            <p>Pegada Hídrica: <span id="water-footprint-result" style="color: blue;">0 litros</span></p>
+            
             <button onclick="restartQuiz()">Recalcular</button>
         </div>
 
@@ -140,7 +153,6 @@
 </html>
 
 
-
-    <script type="module" src="./script.js"></script
+    <script type="module" src="./script.js"></script>
 </body>
 </html>

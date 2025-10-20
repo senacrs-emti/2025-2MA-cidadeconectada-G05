@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', (event) => {
     const rangeSlider = document.getElementById('rangeAlimentos');
     const porcentagemValor = document.getElementById('porcentagemValor');
@@ -28,6 +27,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 let userResponses = {
     housingType: '',
     meatFrequency: 0,
+    localFoodPercentage: 4, // Valor inicial
+    hasEnergy: 'nao', // Valor inicial
     // ... outras categorias ...
 };
 
@@ -46,6 +47,16 @@ const EMISSION_FACTORS = {
         // Mapeamento de 0 (Nunca) a 100 (Muito Frequente)
         perKilogramPerYear: 5, // Fator de base para consumo médio
         meatImpact: 50, // Multiplicador para carne
+    },
+    // NOVO FATOR: Energia
+    energy: {
+        'sim': 2500, // Alto impacto se for de fonte não renovável
+        'nao': 50,
+    }
+    // NOVO FATOR: Hídrico (L/ano)
+    ,water: {
+        base: 100000, // Pegada hídrica base
+        energyMultiplier: 0.5, // Multiplicador se tiver energia
     }
 };
 // Função para avançar para a próxima etapa
@@ -58,18 +69,32 @@ function nextStep(currentStepName) {
         let selectedOption = document.querySelector('input[name="housing-type"]:checked');
         if (selectedOption) {
             userResponses.housingType = selectedOption.value;
-            nextStepElement = document.getElementById('step-food');
+            // PRÓXIMA ETAPA APÓS 'housing' DEVE SER 'food'
+            nextStepElement = document.getElementById('step-food'); 
         } else {
             alert("Por favor, selecione uma opção.");
             return;
         }
     } else if (currentStepName === 'food') {
         userResponses.meatFrequency = document.getElementById('meat-frequency').value;
-        // Se houver mais etapas, defina a próxima aqui:
-        // nextStepElement = document.getElementById('step-transporte');
-        // Se for a última etapa antes do resultado:
-        calculateTotalFootprint();
-        nextStepElement = document.getElementById('step-result');
+        // PRÓXIMA ETAPA APÓS 'food' DEVE SER 'step-food-local' (o segundo div com ID duplicado no HTML)
+        // Como o HTML tem IDs duplicados, usarei a convenção que seria mais correta:
+        nextStepElement = document.querySelectorAll('#calculator-container > div.quiz-step')[2]; 
+    } else if (currentStepName === 'food-local') { // Tratamento para o segundo quiz de alimentos
+        userResponses.localFoodPercentage = document.getElementById('rangeAlimentos').value;
+         // PRÓXIMA ETAPA APÓS 'food-local' DEVE SER A PERGUNTA DE ENERGIA
+        nextStepElement = document.getElementById('step-energy');
+    } else if (currentStepName === 'energy') { // Nova etapa: Energia
+        let selectedOption = document.querySelector('input[name="energy-presence"]:checked');
+        if (selectedOption) {
+            userResponses.hasEnergy = selectedOption.value;
+            // ÚLTIMA ETAPA: CALCULA E VAI PARA O RESULTADO
+            calculateTotalFootprint();
+            nextStepElement = document.getElementById('step-result');
+        } else {
+            alert("Por favor, selecione uma opção.");
+            return;
+        }
     }
 
     // 2. NAVEGAÇÃO
@@ -95,25 +120,66 @@ function updateMeatLabel(value) {
     }
 }
 
-// Função principal de cálculo
+// Função principal 
 function calculateTotalFootprint() {
-    let totalFootprint = 0; // em kg de CO2e
+    let totalFootprint = 0; // CO2
+    let totalWaterFootprint = EMISSION_FACTORS.water.base; // em Litros
 
-    // 1. CÁLCULO DE HABITAÇÃO (exemplo)
+    // 1. CÁLCULO DE HABITAÇÃO
     let housingFactor = EMISSION_FACTORS.housing[userResponses.housingType] || 0;
     totalFootprint += housingFactor;
 
-    // 2. CÁLCULO DE ALIMENTAÇÃO (exemplo)
-    // Assumimos que a frequência é uma porcentagem (0 a 100)
+    // 2. CÁLCULO DE ALIMENTAÇÃO 
     let foodImpact = EMISSION_FACTORS.food.perKilogramPerYear * (1 + (userResponses.meatFrequency / 100) * EMISSION_FACTORS.food.meatImpact);
-    totalFootprint += foodImpact;
-
-    // 3. (ADICIONAR OUTROS CÁLCULOS AQUI)
     
-    // Converter para toneladas e mostrar o resultado
-    let totalTonnes = (totalFootprint / 1000).toFixed(2); // Duas casas decimais
+    // Ajuste baseado em alimentos locais menos distanccia menor pegada
+    foodImpact *= (1 - (userResponses.localFoodPercentage / 200)); // Multiplica  fator de redução
+    totalFootprint += foodImpact;
+    
+    let energyFactor = EMISSION_FACTORS.energy[userResponses.hasEnergy] || 0;
+    totalFootprint += energyFactor;
+    
+    if (userResponses.hasEnergy === 'sim') {
+        totalWaterFootprint *= (1 + EMISSION_FACTORS.water.energyMultiplier);
+    }
+
+    // Conversão e Exibição do Resultado no SPAN 
+    let totalTonnes = (totalFootprint / 1000).toFixed(2); 
     document.getElementById('final-result').textContent = `${totalTonnes} Toneladas de CO2e por ano`;
+    
+    // Exibição do Resultado no  SPAN 
+    let totalWaterM3 = (totalWaterFootprint / 1000).toFixed(0); // Convertendo para m³
+    document.getElementById('water-footprint-result').textContent = `${totalWaterM3} m³ (metros cúbicos) de água por ano`;
 }
+
+// Função para atualizar o valor da resposta e o label de status
+function updateEnergyValue(checkbox) {
+    // 1. Atualiza a resposta no objeto de controle do formulário
+    // Se estiver marcado (checked), o valor é 'sim'
+    if (checkbox.checked) {
+        userResponses.hasEnergy = 'sim';
+        document.getElementById('energy-status-label').textContent = 'SIM';
+        document.getElementById('energy-status-label').style.color = 'green';
+    } 
+    // Se estiver desmarcado (unchecked), o valor é 'nao'
+    else {
+        userResponses.hasEnergy = 'nao';
+        document.getElementById('energy-status-label').textContent = 'NÃO';
+        document.getElementById('energy-status-label').style.color = 'red';
+    }
+}
+
+// Garante o valor inicial ao carregar
+document.addEventListener('DOMContentLoaded', () => {
+    
+    // Inicializa o estado do switch de energia
+    const initialCheckbox = document.getElementById('energy-toggle');
+    if (initialCheckbox) {
+        // Define o estado inicial como desmarcado ('nao') se não houver 'checked' no HTML
+        initialCheckbox.checked = (userResponses.hasEnergy === 'sim');
+        updateEnergyValue(initialCheckbox);
+    }
+});
 
 // Função para reiniciar o quiz
 function restartQuiz() {
