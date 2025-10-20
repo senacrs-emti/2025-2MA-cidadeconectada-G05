@@ -1,0 +1,50 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #70c5ce;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+}
+
+#tela {
+    position: relative;
+    width: 800px;
+    height: 500px;
+    background: url('20b127a2-9c02-4d45-917e-a8d015abbce9.png') center/cover no-repeat;
+    border: 6px solid #222;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#bola {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    cursor: grab;
+    bottom: 50px;
+    left: 100px;
+    background: url('https://static.vecteezy.com/system/resources/thumbnails/011/993/483/small/white-crumpled-paper-balls-for-design-element-png.png') center/cover no-repeat;
+}
+
+#cesta {
+    position: absolute;
+    top: 100px;
+    right: 100px;
+    width: 150px;
+    height: 150px;
+    background: url('https://png.pngtree.com/png-clipart/20200701/original/pngtree-red-trash-can-png-image_5416005.jpg') center/contain no-repeat;
+    pointer-events: none;
+}
+
+#placar {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 26px;
+    color: white;
+    text-shadow: 2px 2px 3px black;
+    font-family: sans-serif;
+}

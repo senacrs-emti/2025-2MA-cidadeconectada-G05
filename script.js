@@ -1,121 +1,93 @@
+const bola = document.getElementById("bola");
+const cesta = document.getElementById("cesta");
+const placar = document.getElementById("placar");
+let pontos = 0;
 
-document.addEventListener('DOMContentLoaded', (event) => {
-    const rangeSlider = document.getElementById('rangeAlimentos');
-    const porcentagemValor = document.getElementById('porcentagemValor');
+let isDragging = false;
+let startX, startY;
+let vx = 0, vy = 0;
+let x = bola.offsetLeft, y = bola.offsetTop;
+let gravity = 0.7;
+let inAir = false;
 
-    // Função para atualizar o valor da porcentagem e o estilo de preenchimento
-    function updateSliderValue(value) {
-        porcentagemValor.textContent = value + ' %';
-        
-        // Opcional: Atualizar a cor de preenchimento da barra 
-        // (necessário para alguns navegadores onde o truque do CSS não é suficiente)
-        const percentage = (value - rangeSlider.min) / (rangeSlider.max - rangeSlider.min) * 100;
-        
-        // Truque para preencher a barra até o seletor
-        rangeSlider.style.background = `linear-gradient(to right, #a2aeb6 ${percentage}%, #ccc ${percentage}%)`;
-    }
-    
-    // Define o valor inicial
-    updateSliderValue(rangeSlider.value);
-
-    // Adiciona um listener para o evento 'input' (ocorre enquanto o usuário arrasta)
-    rangeSlider.addEventListener('input', (e) => {
-        updateSliderValue(e.target.value);
-    });
+bola.addEventListener("mousedown", (e) => {
+    if (inAir) return;
+    isDragging = true;
+    startX = e.clientX;
+    startY = e.clientY;
+    bola.style.cursor = "grabbing";
 });
 
-// Objeto para armazenar as respostas do usuário
-let userResponses = {
-    housingType: '',
-    meatFrequency: 0,
-    // ... outras categorias ...
-};
+window.addEventListener("mousemove", (e) => {
+    if (!isDragging || inAir) return;
+    let dx = e.clientX - startX;
+    let dy = e.clientY - startY;
+    bola.style.left = x + dx + "px";
+    bola.style.top = y + dy + "px";
+});
 
-// ===============================================
-// Fatores de Emissão (a parte crucial do cálculo)
-// Valores fictícios - devem ser baseados em dados reais (kg CO2e)
-const EMISSION_FACTORS = {
-    housing: {
-        'sem-agua-potavel': 1000,
-        'com-agua-potavel': 800,
-        'duplex': 600,
-        'condominio-luxo': 1200,
-        // ... outros fatores anuais em kg CO2e
-    },
-    food: {
-        // Mapeamento de 0 (Nunca) a 100 (Muito Frequente)
-        perKilogramPerYear: 5, // Fator de base para consumo médio
-        meatImpact: 50, // Multiplicador para carne
-    }
-};
-// Função para avançar para a próxima etapa
-function nextStep(currentStepName) {
-    let currentStep = document.getElementById(`step-${currentStepName}`);
-    let nextStepElement = null;
+window.addEventListener("mouseup", (e) => {
+    if (!isDragging || inAir) return;
+    isDragging = false;
+    bola.style.cursor = "grab";
 
-    // 1. CAPTURAR E SALVAR DADOS da etapa atual
-    if (currentStepName === 'housing') {
-        let selectedOption = document.querySelector('input[name="housing-type"]:checked');
-        if (selectedOption) {
-            userResponses.housingType = selectedOption.value;
-            nextStepElement = document.getElementById('step-food');
-        } else {
-            alert("Por favor, selecione uma opção.");
+    // calcula força do arremesso
+    vx = (x - bola.offsetLeft) * 0.3;
+    vy = (y - bola.offsetTop) * 0.3;
+    inAir = true;
+    animar();
+});
+
+function animar() {
+    if (!inAir) return;
+    vx *= 0.99;
+    vy += gravity;
+
+    x += vx;
+    y += vy;
+
+    // colisão com chão
+    if (y + bola.clientHeight >= 500) {
+        y = 500 - bola.clientHeight;
+        vy *= -0.6;
+        vx *= 0.8;
+        if (Math.abs(vy) < 1 && Math.abs(vx) < 1) {
+            inAir = false;
             return;
         }
-    } else if (currentStepName === 'food') {
-        userResponses.meatFrequency = document.getElementById('meat-frequency').value;
-        // Se houver mais etapas, defina a próxima aqui:
-        // nextStepElement = document.getElementById('step-transporte');
-        // Se for a última etapa antes do resultado:
-        calculateTotalFootprint();
-        nextStepElement = document.getElementById('step-result');
     }
 
-    // 2. NAVEGAÇÃO
-    if (nextStepElement) {
-        currentStep.classList.remove('active-step');
-        currentStep.classList.add('hidden-step');
-        nextStepElement.classList.remove('hidden-step');
-        nextStepElement.classList.add('active-step');
+    // colisão lateral
+    if (x <= 0 || x + bola.clientWidth >= 800) {
+        vx *= -0.8;
     }
-}
 
-// Função de atualização do label (para o slider de alimentação)
-function updateMeatLabel(value) {
-    let label = document.getElementById('meat-label');
-    if (value == 0) {
-        label.textContent = 'Nunca (Vegano/Vegetariano)';
-    } else if (value > 0 && value <= 33) {
-        label.textContent = 'Raramente (1-2x por semana)';
-    } else if (value > 33 && value <= 66) {
-        label.textContent = 'Moderadamente (3-5x por semana)';
-    } else {
-        label.textContent = 'Muito frequentemente (carne diariamente)';
+    // detectar cesta
+    const cestaRect = cesta.getBoundingClientRect();
+    const bolaRect = bola.getBoundingClientRect();
+
+    if (
+        bolaRect.right > cestaRect.left + 40 &&
+        bolaRect.left < cestaRect.right - 40 &&
+        bolaRect.bottom > cestaRect.top + 60 &&
+        bolaRect.top < cestaRect.bottom - 20
+    ) {
+        pontos++;
+        placar.textContent = "Pontos: " + pontos;
+        resetarBola();
+        return;
     }
+
+    bola.style.left = x + "px";
+    bola.style.top = y + "px";
+
+    requestAnimationFrame(animar);
 }
 
-// Função principal de cálculo
-function calculateTotalFootprint() {
-    let totalFootprint = 0; // em kg de CO2e
-
-    // 1. CÁLCULO DE HABITAÇÃO (exemplo)
-    let housingFactor = EMISSION_FACTORS.housing[userResponses.housingType] || 0;
-    totalFootprint += housingFactor;
-
-    // 2. CÁLCULO DE ALIMENTAÇÃO (exemplo)
-    // Assumimos que a frequência é uma porcentagem (0 a 100)
-    let foodImpact = EMISSION_FACTORS.food.perKilogramPerYear * (1 + (userResponses.meatFrequency / 100) * EMISSION_FACTORS.food.meatImpact);
-    totalFootprint += foodImpact;
-
-    // 3. (ADICIONAR OUTROS CÁLCULOS AQUI)
-    
-    // Converter para toneladas e mostrar o resultado
-    let totalTonnes = (totalFootprint / 1000).toFixed(2); // Duas casas decimais
-    document.getElementById('final-result').textContent = `${totalTonnes} Toneladas de CO2e por ano`;
-}
-
-// Função para reiniciar o quiz
-function restartQuiz() {
-    location.reload(); // Maneira mais simples de reiniciar para este exemplo
+function resetarBola() {
+    x = 100;
+    y = 400;
+    bola.style.left = x + "px";
+    bola.style.top = y + "px";
+    inAir = false;
 }
