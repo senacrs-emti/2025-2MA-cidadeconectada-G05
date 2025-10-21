@@ -79,6 +79,7 @@
             <span class="label-max">TODA</span>
         </div>
         
+        
         <input type="range" min="0" max="100" value="4" class="range-slider" id="rangeAlimentos">
         
         <span class="porcentagem-valor" id="porcentagemValor">4 %</span>
@@ -91,31 +92,35 @@
                     
                        
                     
-                
-                <button type="button" onclick="nextStep('food')">Próxima Etapa</button>
+              <button type="button" onclick="nextStep('food')">Próxima Etapa</button>
                  <div id="step-housing" class="quiz-step active-step">
             <h1>Qual material é construida sua casa?</h1>
 
             <form id="housing-form">
-                <label for="option1">
-                    <input type="radio" id="option1" name="housing-type" value="sem-agua-potavel">
-                    Moradia sem água potável
+                <label for="optionmaterial1">
+                    <input type="radio" id="optionmaterial1" name="housing-type" value="palha/bambu">
+                    Palha/bambu
                 </label><br>
 
-                <label for="option2">
-                    <input type="radio" id="option2" name="housing-type" value="com-agua-potavel">
-                    Moradia com água potável
+                <label for="optionmaterial2">
+                    <input type="radio" id="optionmaterial2" name="housing-type" value="tijolo/cimento">
+                    Tijolo/cimento
                 </label><br>
                 
-                <label for="option4">
-                    <input type="radio" id="option4" name="housing-type" value="duplex">
-                    Duplex, Moradia em banda ou Edifício com 2-4 habitações
+                <label for="optionmaterial3">
+                    <input type="radio" id="optionmaterial3" name="housing-type" value="aço/outro">
+                    Aço/outro
                 </label><br>
 
-                <label for="option5">
-                    <input type="radio" id="option5" name="housing-type" value="condominio-luxo">
-                    Condomínio de luxo
-                </label><br>
+                <label for="optionmaterial4">
+                    <input type="radio" id="optionmaterial4" name="housing-type" value="madeira">
+                    Madeira
+
+                    
+                <label for="optionmaterial5">
+                    <input type="radio" id="optionmaterial5" name="housing-type" value="adobe/argila/barro">
+                    Adobe/Argila/Barro
+                    
             </form>
         </div>
 
