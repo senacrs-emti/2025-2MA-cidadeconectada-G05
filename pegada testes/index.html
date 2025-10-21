@@ -1,0 +1,138 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=], initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora Ecológica</title>
+</head>
+<body>
+
+    <div id="calculator-container">
+
+        <div id="step-housing" class="quiz-step active-step">
+            <h1>Que tipo de habitação descreve melhor a tua casa?</h1>
+
+            <form id="housing-form">
+                <label for="option1">
+                    <input type="radio" id="option1" name="housing-type" value="sem-agua-potavel">
+                    Moradia sem água potável
+                </label><br>
+
+                <label for="option2">
+                    <input type="radio" id="option2" name="housing-type" value="com-agua-potavel">
+                    Moradia com água potável
+                </label><br>
+                
+                <label for="option4">
+                    <input type="radio" id="option4" name="housing-type" value="duplex">
+                    Duplex, Moradia em banda ou Edifício com 2-4 habitações
+                </label><br>
+
+                <label for="option5">
+                    <input type="radio" id="option5" name="housing-type" value="condominio-luxo">
+                    Condomínio de luxo
+                </label><br>
+
+                <button type="button" onclick="nextStep('housing')">Próxima Etapa</button>
+            </form>
+        </div>
+
+        <div id="step-food" class="quiz-step hidden-step">
+            <p class="section-title">ALIMENTAÇÃO</p>
+            <h1>Com que frequência consomes produtos de origem animal?</h1>
+            <p class="subtitle">(carne de vaca, porco, aves, peixe, ovos, lacticínios)</p>
+
+            <form id="food-form">
+                <div class="slider-container">
+                   
+                        <span>NUNCA</span>
+                          <input type="range" id="meat-frequency" min="0" max="100" value="75" step="1" oninput="updateMeatLabel(this.value)">
+                    <div class="labels"><span>MUITO FREQUENTEMENTE</span>
+
+                    
+                       
+                    </div>
+                    <input type="radio" name="frequency" id="frequency"><p id="meat-label">
+                        <p> frequentemente (carne diariamente)</p>
+                </div>
+                
+                <button type="button" onclick="nextStep('food')">Próxima Etapa</button>
+            </form>
+        </div>
+         <div id="step-food" class="quiz-step hidden-step">
+            <p class="section-title">ALIMENTAÇÃO</p>
+            <h1>Dos alimentos que você consome qual porcentagem de comida  não embalada não processada ou cultivada localmente. </h1>
+             
+    <p class="subtexto">(menos de 320 km de distância)</p>
+    <div class="slider-container">
+        <div class="labels">
+            <span class="label-min">NENHUMA</span>
+            <span class="label-max">TODA</span>
+        </div>
+        
+        <input type="range" min="0" max="100" value="4" class="range-slider" id="rangeAlimentos">
+        
+        <span class="porcentagem-valor" id="porcentagemValor">4 %</span>
+    </div>
+</div>
+
+            <form id="food-form">
+                <div class="slider-container">
+                
+                    
+                       
+                    
+                
+                <button type="button" onclick="nextStep('food')">Próxima Etapa</button>
+                 <div id="step-housing" class="quiz-step active-step">
+            <h1>Qual material é construida sua casa?</h1>
+
+            <form id="housing-form">
+                <label for="option1">
+                    <input type="radio" id="option1" name="housing-type" value="sem-agua-potavel">
+                    Moradia sem água potável
+                </label><br>
+
+                <label for="option2">
+                    <input type="radio" id="option2" name="housing-type" value="com-agua-potavel">
+                    Moradia com água potável
+                </label><br>
+                
+                <label for="option4">
+                    <input type="radio" id="option4" name="housing-type" value="duplex">
+                    Duplex, Moradia em banda ou Edifício com 2-4 habitações
+                </label><br>
+
+                <label for="option5">
+                    <input type="radio" id="option5" name="housing-type" value="condominio-luxo">
+                    Condomínio de luxo
+                </label><br>
+            </form>
+        </div>
+
+        <div id="step-result" class="quiz-step hidden-step">
+            <h1>Sua Pegada de Carbono Anual é:</h1>
+            <p id="final-result">Calculando...</p>
+            <button onclick="restartQuiz()">Recalcular</button>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+
+    <script type="module" src="./script.js"></script
+</body>
+</html>
