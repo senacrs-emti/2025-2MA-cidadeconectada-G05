@@ -1,121 +1,124 @@
-
 document.addEventListener('DOMContentLoaded', (event) => {
-    const rangeSlider = document.getElementById('rangeAlimentos');
+    // ------------------------------------------------------------------
+    // 1. FUNÇÃO PRINCIPAL PARA ATUALIZAR O PREENCHIMENTO VISUAL DA BARRA
+    // ------------------------------------------------------------------
+    function updateSliderFill(slider, value) {
+        // Converte min/max/value para números
+        const min = parseInt(slider.min) || 0;
+        const max = parseInt(slider.max) || 100;
+        const val = parseInt(value) || 0;
+        
+        // Calcula a porcentagem de preenchimento
+        const percentage = (val - min) / (max - min) * 100;
+
+        // Aplica um background gradiente que simula a barra preenchida
+        // O valor 'percentage%' determina até onde a cor preenchida (#a2aeb6) vai.
+        // #466c71 é a cor da trilha não preenchida.
+        slider.style.background = `linear-gradient(to right, #a2aeb6 ${percentage}%, #466c71 ${percentage}%)`;
+    }
+
+    // ------------------------------------------------------------------
+    // 2. SLIDER: ALIMENTOS (rangeAlimentos)
+    // ------------------------------------------------------------------
+    const rangeAlimentos = document.getElementById('rangeAlimentos');
     const porcentagemValor = document.getElementById('porcentagemValor');
 
-    // Função para atualizar o valor da porcentagem e o estilo de preenchimento
-    function updateSliderValue(value) {
+    function updateAlimentos(value) {
         porcentagemValor.textContent = value + ' %';
-        
-        // Opcional: Atualizar a cor de preenchimento da barra 
-        // (necessário para alguns navegadores onde o truque do CSS não é suficiente)
-        const percentage = (value - rangeSlider.min) / (rangeSlider.max - rangeSlider.min) * 100;
-        
-        // Truque para preencher a barra até o seletor
-        rangeSlider.style.background = `linear-gradient(to right, #a2aeb6 ${percentage}%, #ccc ${percentage}%)`;
+        updateSliderFill(rangeAlimentos, value);
     }
     
-    // Define o valor inicial
-    updateSliderValue(rangeSlider.value);
+    if (rangeAlimentos) {
+        rangeAlimentos.addEventListener('input', (e) => updateAlimentos(e.target.value));
+        updateAlimentos(rangeAlimentos.value);
+    }
 
-    // Adiciona um listener para o evento 'input' (ocorre enquanto o usuário arrasta)
-    rangeSlider.addEventListener('input', (e) => {
-        updateSliderValue(e.target.value);
-    });
+    // ------------------------------------------------------------------
+    // 3. SLIDER: PESSOAS (rangePessoas) - CORREÇÃO DE LÓGICA
+    // ------------------------------------------------------------------
+    const rangePessoas = document.getElementById('rangePessoas');
+    const valorPessoas = document.getElementById('valorPessoas');
+
+    function updatePessoas(value) { 
+        // Conversão para número é CRUCIAL para a comparação de 10+
+        const numValue = parseInt(value, 10);
+        let displayValue;
+
+        if (numValue === 1) {
+            displayValue = 'APENAS EU';
+        } else if (numValue >= 10) { // Agora compara corretamente o número 10
+            displayValue = '10+';
+        } else {
+            displayValue = numValue;
+        }
+        
+        valorPessoas.textContent = displayValue;
+        
+        if (rangePessoas) updateSliderFill(rangePessoas, value); 
+    }
+
+    if (rangePessoas) {
+        rangePessoas.addEventListener('input', (e) => updatePessoas(e.target.value));
+        updatePessoas(rangePessoas.value); 
+    }
+
+    // ------------------------------------------------------------------
+    // 4. SLIDER: TAMANHO DA CASA (rangeTamanho)
+    // ------------------------------------------------------------------
+    const rangeTamanho = document.getElementById('rangeTamanho');
+    const valorTamanho = document.getElementById('valorTamanho');
+    const labelTamanho = document.getElementById('labelTamanho');
+
+    function getTamanhoLabel(m2) {
+        if (m2 <= 20) return 'Minúscula';
+        if (m2 <= 50) return 'Pequena';
+        if (m2 <= 100) return 'Média';
+        if (m2 <= 200) return 'Grande';
+        return 'Enorme';
+    }
+
+    function updateTamanho(value) {
+        valorTamanho.textContent = value + ' m²';
+        labelTamanho.textContent = getTamanhoLabel(parseInt(value));
+
+        if (rangeTamanho) updateSliderFill(rangeTamanho, value);
+    }
+
+    if (rangeTamanho) {
+        rangeTamanho.addEventListener('input', (e) => updateTamanho(e.target.value));
+        updateTamanho(rangeTamanho.value);
+    }
+
+    // ------------------------------------------------------------------
+    // 5. TOGGLE SWITCH
+    // ------------------------------------------------------------------
+    function alternarToggle() {
+        const checkbox = document.getElementById('toggleSwitch');
+        const estadoTexto = document.getElementById('estado');
+        const labelNao = document.getElementById('labelNao');
+        const labelSim = document.getElementById('labelSim');
+
+        if (checkbox.checked) {
+            estadoTexto.textContent = 'SIM';
+            estadoTexto.style.color = 'green'; 
+            labelSim.style.fontWeight = 'bold'; 
+            labelNao.style.fontWeight = 'normal'; 
+        } else {
+            estadoTexto.textContent = 'NÃO';
+            estadoTexto.style.color = 'red'; 
+            labelNao.style.fontWeight = 'bold'; 
+            labelSim.style.fontWeight = 'normal'; 
+        }
+    }
+    
+    // Inicializa o toggle
+    const toggleSwitch = document.getElementById('toggleSwitch');
+    if (toggleSwitch) {
+        toggleSwitch.addEventListener('change', alternarToggle);
+        alternarToggle(); // Chama para definir o estado inicial
+    }
 });
 
-// Objeto para armazenar as respostas do usuário
-let userResponses = {
-    housingType: '',
-    meatFrequency: 0,
-    // ... outras categorias ...
-};
-
-// ===============================================
-// Fatores de Emissão (a parte crucial do cálculo)
-// Valores fictícios - devem ser baseados em dados reais (kg CO2e)
-const EMISSION_FACTORS = {
-    housing: {
-        'sem-agua-potavel': 1000,
-        'com-agua-potavel': 800,
-        'duplex': 600,
-        'condominio-luxo': 1200,
-        // ... outros fatores anuais em kg CO2e
-    },
-    food: {
-        // Mapeamento de 0 (Nunca) a 100 (Muito Frequente)
-        perKilogramPerYear: 5, // Fator de base para consumo médio
-        meatImpact: 50, // Multiplicador para carne
-    }
-};
-// Função para avançar para a próxima etapa
-function nextStep(currentStepName) {
-    let currentStep = document.getElementById(`step-${currentStepName}`);
-    let nextStepElement = null;
-
-    // 1. CAPTURAR E SALVAR DADOS da etapa atual
-    if (currentStepName === 'housing') {
-        let selectedOption = document.querySelector('input[name="housing-type"]:checked');
-        if (selectedOption) {
-            userResponses.housingType = selectedOption.value;
-            nextStepElement = document.getElementById('step-food');
-        } else {
-            alert("Por favor, selecione uma opção.");
-            return;
-        }
-    } else if (currentStepName === 'food') {
-        userResponses.meatFrequency = document.getElementById('meat-frequency').value;
-        // Se houver mais etapas, defina a próxima aqui:
-        // nextStepElement = document.getElementById('step-transporte');
-        // Se for a última etapa antes do resultado:
-        calculateTotalFootprint();
-        nextStepElement = document.getElementById('step-result');
-    }
-
-    // 2. NAVEGAÇÃO
-    if (nextStepElement) {
-        currentStep.classList.remove('active-step');
-        currentStep.classList.add('hidden-step');
-        nextStepElement.classList.remove('hidden-step');
-        nextStepElement.classList.add('active-step');
-    }
-}
-
-// Função de atualização do label (para o slider de alimentação)
-function updateMeatLabel(value) {
-    let label = document.getElementById('meat-label');
-    if (value == 0) {
-        label.textContent = 'Nunca (Vegano/Vegetariano)';
-    } else if (value > 0 && value <= 33) {
-        label.textContent = 'Raramente (1-2x por semana)';
-    } else if (value > 33 && value <= 66) {
-        label.textContent = 'Moderadamente (3-5x por semana)';
-    } else {
-        label.textContent = 'Muito frequentemente (carne diariamente)';
-    }
-}
-
-// Função principal de cálculo
-function calculateTotalFootprint() {
-    let totalFootprint = 0; // em kg de CO2e
-
-    // 1. CÁLCULO DE HABITAÇÃO (exemplo)
-    let housingFactor = EMISSION_FACTORS.housing[userResponses.housingType] || 0;
-    totalFootprint += housingFactor;
-
-    // 2. CÁLCULO DE ALIMENTAÇÃO (exemplo)
-    // Assumimos que a frequência é uma porcentagem (0 a 100)
-    let foodImpact = EMISSION_FACTORS.food.perKilogramPerYear * (1 + (userResponses.meatFrequency / 100) * EMISSION_FACTORS.food.meatImpact);
-    totalFootprint += foodImpact;
-
-    // 3. (ADICIONAR OUTROS CÁLCULOS AQUI)
-    
-    // Converter para toneladas e mostrar o resultado
-    let totalTonnes = (totalFootprint / 1000).toFixed(2); // Duas casas decimais
-    document.getElementById('final-result').textContent = `${totalTonnes} Toneladas de CO2e por ano`;
-}
-
-// Função para reiniciar o quiz
-function restartQuiz() {
-    location.reload(); // Maneira mais simples de reiniciar para este exemplo
-}
+// Funções globais de navegação e cálculo (devem ficar fora do DOMContentLoaded)
+// ... seu código 'window.nextStep', 'window.updateMeatLabel', 'window.calculateTotalFootprint', etc. ...
+// Você deve ter certeza que apenas uma versão dessas funções exista.
