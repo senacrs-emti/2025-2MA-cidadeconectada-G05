@@ -179,6 +179,7 @@
                         <span class="subtexto-slider" id="labelTamanho">Pequena</span>
                     </div>
                 </div>
+                <button type="button" onclick="nextStep('food-meat')">Próxima Etapa</button>
 
                 <h1>Tens energia elétrica em casa?</h1>
                 <div>
@@ -191,6 +192,16 @@
     <p>Estado atual: <strong id="estado">NÃO</strong></p>
                 <hr>
         </div>
+        <div class="slider-wrapper">
+            <span class="label">NADA</span>
+            <input type="range" min="0" max="100" value="50" step="10" id="rangeEficiencia">
+            <span class="label">MUITO</span>
+        </div>
+
+        <div id="descricao">
+            Mova o slider para indicar a eficiência da sua casa.
+        </div>
+    </div>
 
         <div id="step-result" class="quiz-step hidden-step">
             <h1>Sua Pegada de Carbono Anual é:</h1>

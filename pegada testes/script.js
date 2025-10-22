@@ -118,6 +118,46 @@ document.addEventListener('DOMContentLoaded', (event) => {
         alternarToggle(); // Chama para definir o estado inicial
     }
 });
+// 1. Definição dos textos de descrição com base na faixa de valor (0 a 100)
+    const descricoes = [
+        { max: 20, texto: "Baixíssima eficiência. A casa provavelmente tem alto consumo de energia e pouca ou nenhuma isolação térmica." },
+        { max: 40, texto: "Pouca eficiência. Consumo de energia alto. Pode haver janelas antigas e falta de isolamento básico." },
+        { max: 60, texto: "Eficiência Média. Algumas melhorias foram feitas (ex: lâmpadas LED), mas o isolamento estrutural pode ser fraco." },
+        { max: 80, texto: "Boa eficiência. Isolamento térmico razoável, eletrodomésticos eficientes e algum controle de temperatura." },
+        { max: 100, texto: "Concebida para a eficiência (aquecimento/arrefecimento passivo, controlo avançado da temperatura e ventilação, baixo consumo de eletricidade)" }
+    ];
+
+    // Função para atualizar a descrição
+    function atualizarDescricao() {
+        const valor = parseInt(slider.value); // Pega o valor atual do slider
+        let novoTexto = "Mova o slider para indicar a eficiência da sua casa."; // Texto padrão
+
+        // Encontra a descrição correta
+        for (const item of descricoes) {
+            if (valor <= item.max) {
+                novoTexto = item.texto;
+                break; // Encontrou a faixa, pode parar o loop
+            }
+        }
+
+        // Atualiza o conteúdo da div de descrição
+        descricao.textContent = novoTexto;
+        
+        // --- TENTATIVA DE AJUSTAR A COR DA BARRA (Apenas para simular, pois exige CSS avançado) ---
+        // Calcula a porcentagem para um gradiente inline simulado
+        const progresso = (valor / slider.max) * 100;
+        
+        // Simulação do gradiente mudando a cor do background do range
+        // Nota: Isso não funciona perfeitamente em todos os navegadores para o <input type="range">, mas é a abordagem mais simples via JS.
+        // O estilo visual exato da imagem original exige CSS específico para webkit/moz/ms (pseudo-elementos), que foge do escopo "simples HTML/JS".
+        slider.style.background = `linear-gradient(to right, #ff8c00 ${progresso}%, #ccc ${progresso}%)`;
+    }
+
+    // 2. Adiciona o ouvinte de evento para quando o slider for movido (evento 'input')
+    slider.addEventListener('input', atualizarDescricao);
+
+    // 3. Executa a função na primeira carga para definir o texto inicial (valor 50)
+    atualizarDescricao();
 
 // Funções globais de navegação e cálculo (devem ficar fora do DOMContentLoaded)
 // ... seu código 'window.nextStep', 'window.updateMeatLabel', 'window.calculateTotalFootprint', etc. ...
