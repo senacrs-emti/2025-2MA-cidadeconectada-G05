@@ -192,24 +192,31 @@
     <p>Estado atual: <strong id="estado">NÃO</strong></p>
                 <hr>
         </div>
-        <div class="slider-wrapper">
-            <span class="label">NADA</span>
-            <input type="range" min="0" max="100" value="50" step="10" id="rangeEficiencia">
-            <span class="label">MUITO</span>
-        </div>
+    
+ <h2>
+    Qual é a percentagem de energia renovável consumida na tua casa? 
+    <button id="infoBtn" type="button">i</button>
+  </h2>
+  <p>(Diretamente ou adquirida. Consulte a sua fatura de eletricidade e/ou gás natural)</p>
 
-        <div id="descricao">
-            Mova o slider para indicar a eficiência da sua casa.
-        </div>
-    </div>
+  <label for="energiaRange">Baixa</label>
+  <input type="range" id="energiaRange" name="energiaRange" min="0" max="100" value="0" />
+  <label for="energiaRange">Alta</label>
 
-        <div id="step-result" class="quiz-step hidden-step">
+  <div>
+    <span id="percentValue">0%</span>
+  </div>
+
+  <button id="set50Btn" type="button">Definir 50%</button>
+
+  
+ 
+
+     <div id="step-result" class="quiz-step hidden-step">
             <h1>Sua Pegada de Carbono Anual é:</h1>
             <p id="final-result">Calculando...</p>
             <button onclick="restartQuiz()">Recalcular</button>
         </div>
-
-    </div>
 
     <script src="script.js"></script>
 </body>

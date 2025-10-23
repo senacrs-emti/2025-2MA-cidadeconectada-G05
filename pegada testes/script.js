@@ -1,25 +1,17 @@
 document.addEventListener('DOMContentLoaded', (event) => {
-    // ------------------------------------------------------------------
-    // 1. FUNÇÃO PRINCIPAL PARA ATUALIZAR O PREENCHIMENTO VISUAL DA BARRA
-    // ------------------------------------------------------------------
+  
     function updateSliderFill(slider, value) {
         // Converte min/max/value para números
         const min = parseInt(slider.min) || 0;
         const max = parseInt(slider.max) || 100;
         const val = parseInt(value) || 0;
         
-        // Calcula a porcentagem de preenchimento
         const percentage = (val - min) / (max - min) * 100;
 
-        // Aplica um background gradiente que simula a barra preenchida
-        // O valor 'percentage%' determina até onde a cor preenchida (#a2aeb6) vai.
-        // #466c71 é a cor da trilha não preenchida.
+       
         slider.style.background = `linear-gradient(to right, #a2aeb6 ${percentage}%, #466c71 ${percentage}%)`;
     }
 
-    // ------------------------------------------------------------------
-    // 2. SLIDER: ALIMENTOS (rangeAlimentos)
-    // ------------------------------------------------------------------
     const rangeAlimentos = document.getElementById('rangeAlimentos');
     const porcentagemValor = document.getElementById('porcentagemValor');
 
@@ -33,20 +25,17 @@ document.addEventListener('DOMContentLoaded', (event) => {
         updateAlimentos(rangeAlimentos.value);
     }
 
-    // ------------------------------------------------------------------
-    // 3. SLIDER: PESSOAS (rangePessoas) - CORREÇÃO DE LÓGICA
-    // ------------------------------------------------------------------
     const rangePessoas = document.getElementById('rangePessoas');
     const valorPessoas = document.getElementById('valorPessoas');
 
     function updatePessoas(value) { 
-        // Conversão para número é CRUCIAL para a comparação de 10+
+       
         const numValue = parseInt(value, 10);
         let displayValue;
 
         if (numValue === 1) {
             displayValue = 'APENAS EU';
-        } else if (numValue >= 10) { // Agora compara corretamente o número 10
+        } else if (numValue >= 10) { 
             displayValue = '10+';
         } else {
             displayValue = numValue;
@@ -62,9 +51,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
         updatePessoas(rangePessoas.value); 
     }
 
-    // ------------------------------------------------------------------
-    // 4. SLIDER: TAMANHO DA CASA (rangeTamanho)
-    // ------------------------------------------------------------------
     const rangeTamanho = document.getElementById('rangeTamanho');
     const valorTamanho = document.getElementById('valorTamanho');
     const labelTamanho = document.getElementById('labelTamanho');
@@ -89,9 +75,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
         updateTamanho(rangeTamanho.value);
     }
 
-    // ------------------------------------------------------------------
-    // 5. TOGGLE SWITCH
-    // ------------------------------------------------------------------
+  
+
     function alternarToggle() {
         const checkbox = document.getElementById('toggleSwitch');
         const estadoTexto = document.getElementById('estado');
@@ -111,14 +96,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
         }
     }
     
-    // Inicializa o toggle
     const toggleSwitch = document.getElementById('toggleSwitch');
     if (toggleSwitch) {
         toggleSwitch.addEventListener('change', alternarToggle);
-        alternarToggle(); // Chama para definir o estado inicial
+        alternarToggle(); 
     }
 });
-// 1. Definição dos textos de descrição com base na faixa de valor (0 a 100)
     const descricoes = [
         { max: 20, texto: "Baixíssima eficiência. A casa provavelmente tem alto consumo de energia e pouca ou nenhuma isolação térmica." },
         { max: 40, texto: "Pouca eficiência. Consumo de energia alto. Pode haver janelas antigas e falta de isolamento básico." },
@@ -129,36 +112,58 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     // Função para atualizar a descrição
     function atualizarDescricao() {
-        const valor = parseInt(slider.value); // Pega o valor atual do slider
-        let novoTexto = "Mova o slider para indicar a eficiência da sua casa."; // Texto padrão
+        const valor = parseInt(slider.value); 
+        let novoTexto = "Mova o slider para indicar a eficiência da sua casa."; 
 
         // Encontra a descrição correta
         for (const item of descricoes) {
             if (valor <= item.max) {
                 novoTexto = item.texto;
-                break; // Encontrou a faixa, pode parar o loop
+                break; 
             }
         }
 
-        // Atualiza o conteúdo da div de descrição
         descricao.textContent = novoTexto;
         
-        // --- TENTATIVA DE AJUSTAR A COR DA BARRA (Apenas para simular, pois exige CSS avançado) ---
-        // Calcula a porcentagem para um gradiente inline simulado
         const progresso = (valor / slider.max) * 100;
         
-        // Simulação do gradiente mudando a cor do background do range
-        // Nota: Isso não funciona perfeitamente em todos os navegadores para o <input type="range">, mas é a abordagem mais simples via JS.
-        // O estilo visual exato da imagem original exige CSS específico para webkit/moz/ms (pseudo-elementos), que foge do escopo "simples HTML/JS".
         slider.style.background = `linear-gradient(to right, #ff8c00 ${progresso}%, #ccc ${progresso}%)`;
     }
 
-    // 2. Adiciona o ouvinte de evento para quando o slider for movido (evento 'input')
+document.addEventListener('DOMContentLoaded', () => {
+  // Seu código existente aqui...
+  
+  const energiaRange = document.getElementById('energiaRange');
+  const percentValue = document.getElementById('percentValue');
+  const set50Btn = document.getElementById('set50Btn');
+
+  function updateEnergiaRange(value) {
+    percentValue.textContent = value + '%';
+
+    const min = parseInt(energiaRange.min);
+    const max = parseInt(energiaRange.max);
+    const val = parseInt(value);
+
+    const percentage = ((val - min) / (max - min)) * 100;
+    energiaRange.style.background = `linear-gradient(to right, #4caf50 ${percentage}%, #ccc ${percentage}%)`;
+  }
+
+  // Atualiza quando o slider é movido
+  energiaRange.addEventListener('input', (e) => {
+    updateEnergiaRange(e.target.value);
+  });
+
+  // Botão para definir 50%
+  set50Btn.addEventListener('click', () => {
+    energiaRange.value = 50;
+    updateEnergiaRange(50);
+  });
+
+  // Inicializa visualização
+  updateEnergiaRange(energiaRange.value);
+});
+
     slider.addEventListener('input', atualizarDescricao);
 
-    // 3. Executa a função na primeira carga para definir o texto inicial (valor 50)
     atualizarDescricao();
 
-// Funções globais de navegação e cálculo (devem ficar fora do DOMContentLoaded)
-// ... seu código 'window.nextStep', 'window.updateMeatLabel', 'window.calculateTotalFootprint', etc. ...
-// Você deve ter certeza que apenas uma versão dessas funções exista.
