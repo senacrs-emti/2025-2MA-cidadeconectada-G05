@@ -16,7 +16,6 @@
 <body>
 
     <div id="calculator-container">
-
         <div id="step-housing" class="quiz-step active-step">
             <h1>Que tipo de habitação descreve melhor a tua casa?</h1>
 
@@ -54,14 +53,14 @@
                 <div class="slider-container">
                     
                         <span>NUNCA</span>
-                          <input type="range" id="meat-frequency" min="0" max="100" value="75" step="1" oninput="updateMeatLabel(this.value)">
+                          <input type="range" id="meat-frequency" min="0" max="100" value="50" step="1" oninput="updateMeatLabel(this.value)">
                     <div class="labels"><span>MUITO FREQUENTEMENTE</span>
 
                     
                         
                     </div>
                     <input type="radio" name="frequency" id="frequency"><p id="meat-label">
-                         <p> frequentemente (carne diariamente)</p>
+                   
                 </div>
                 
                 <button type="button" onclick="nextStep('food')">Próxima Etapa</button>
@@ -78,9 +77,9 @@
             <span class="label-max">TODA</span>
         </div>
         
-        <input type="range" min="0" max="100" value="4" class="range-slider" id="rangeAlimentos">
+        <input type="range" min="0" max="100" value="0" class="range-slider" id="rangeAlimentos">
         
-        <span class="porcentagem-valor" id="porcentagemValor">4 %</span>
+        <span class="porcentagem-valor" id="porcentagemValor">0%</span>
     </div>
 </div>
 
