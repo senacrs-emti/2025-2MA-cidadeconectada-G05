@@ -7,12 +7,19 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="tela">
-    <div id="placar">Pontos: 0</div>
-    <div id="cesta"></div>
-    <div id="bola"></div>
+  <div id="placar">
+    <span>Pontos: <span id="pontos">0</span></span>
+    <button id="resetar">Resetar Bola</button>
   </div>
 
+  <div id="tela">
+    <canvas id="trajetoria"></canvas>
+    <div id="cesta"></div>
+    <div id="cesta2"></div> 
+    <div id="cesta3"></div> 
+    <div id="cesta4"></div> 
+    <div id="bola"></div>
+  </div>
   <script src="script.js"></script>
 </body>
 </html>

@@ -1,50 +1,99 @@
 body {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    background: #70c5ce;
+    justify-content: center;
+    background: radial-gradient(circle at center, #1e1e1e, #000);
     height: 100vh;
     margin: 0;
     overflow: hidden;
 }
 
+#placar {
+    background: black;
+    color: white;
+    font-family: "Courier New", monospace;
+    font-size: 28px;
+    padding: 15px 25px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 0 15px #ff4400;
+}
+
+#placar span {
+    letter-spacing: 2px;
+}
+
+#resetar {
+    background: #ff4400;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: 0.2s;
+    position:relative;
+
+}
+
+#resetar:hover {
+    background: #ff6600;
+}
+
+/* Tela do jogo */
 #tela {
     position: relative;
-    width: 800px;
-    height: 500px;
+    width: 1000px;
+    height: 600px;
     background: url('20b127a2-9c02-4d45-917e-a8d015abbce9.png') center/cover no-repeat;
     border: 6px solid #222;
-    border-radius: 10px;
+    border-radius: 12px;
     overflow: hidden;
 }
 
+/* Canvas da trajetória */
+#trajetoria {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* Bola */
 #bola {
     position: absolute;
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
-    cursor: grab;
-    bottom: 50px;
+    bottom: 60px;
     left: 100px;
     background: url('https://static.vecteezy.com/system/resources/thumbnails/011/993/483/small/white-crumpled-paper-balls-for-design-element-png.png') center/cover no-repeat;
 }
 
+/* Cesta */
 #cesta {
     position: absolute;
+    width: 100px;
+    height: 100px;
+    background: url('https://cdn.pixabay.com/photo/2013/07/13/01/23/recycle-bin-155650_1280.png') center/contain no-repeat;
+    pointer-events: none;
     top: 100px;
     right: 100px;
-    width: 150px;
-    height: 150px;
-    background: url('https://png.pngtree.com/png-clipart/20200701/original/pngtree-red-trash-can-png-image_5416005.jpg') center/contain no-repeat;
+    transition: transform 0.5s ease, top 0.5s ease, left 0.5s ease;
+}
+/* Cestas extras */
+#cesta2, #cesta3, #cesta4 {
+    position: absolute;
+    width: 100px;
+    height: 100px;
     pointer-events: none;
+    transition: transform 0.5s ease, top 0.5s ease, left 0.5s ease;
 }
 
-#placar {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    font-size: 26px;
-    color: white;
-    text-shadow: 2px 2px 3px black;
-    font-family: sans-serif;
-}
+
