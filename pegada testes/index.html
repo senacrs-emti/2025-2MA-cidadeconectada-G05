@@ -67,23 +67,7 @@
                 </label>
 
                 <hr>
-<div class="pergunta-container">
-    <p class="pergunta">
-        Quantas pessoas residem no teu agregado familiar? 
-        <span class="info-icon" title="Mais informações...">ⓘ</span>
-    </p>
 
-    <div class="slider-container">
-        <div class="labels">
-            <span class="label-min">APENAS EU</span>
-            <span class="label-max">10+</span>
-        </div>
-        
-        <input type="range" min="1" max="10" value="2" class="range-slider range-pessoas" id="rangePessoas">
-        
-        <span class="porcentagem-valor" id="valorPessoas">2</span>
-    </div>
-</div>
 
 <div class="pergunta-container">
     <p class="pergunta">
@@ -104,13 +88,7 @@
     </div>
 </div>
 
-                <h1>Tens energia elétrica em casa?</h1>
-                <div>
-                    <span id="labelNao">NÃO</span>
-                    <input type="checkbox" id="toggleSwitch" onchange="alternarToggle()">
-                    <span id="Sim">SIM</span>
-                </div>
-                <hr>
+
                 
                 <button type="button" onclick="nextStep('housing-material')">Próxima Etapa</button>
             </form>
@@ -150,48 +128,34 @@
                 <span class="porcentagem-valor" id="porcentagemValor">4 %</span>
             </div>
 
-            <button type="button" onclick="nextStep('food-local')">Próxima Etapa</button>
-                 <div class="pergunta-container">
+          
+                </div>
+                <button type="button" onclick="nextStep('food-meat')">Próxima Etapa</button>
+                <div class="pergunta-container">
                     <p class="pergunta">
-                        Quantas pessoas residem no teu agregado familiar? 
+                     <<h1>   Quantas pessoas residem no teu agregado familiar? </h1>
+                        <span class="info-icon" title="Mais informações..."></span>
                     </p>
+                
                     <div class="slider-container">
                         <div class="labels">
                             <span class="label-min">APENAS EU</span>
                             <span class="label-max">10+</span>
                         </div>
+                        
                         <input type="range" min="1" max="10" value="2" class="range-slider range-pessoas" id="rangePessoas">
-                        <span class="porcentagem-valor" id="valorPessoas">10+</span>
+                        
+                        <span class="porcentagem-valor" id="valorPessoas">2</span>
                     </div>
                 </div>
-
-                <div class="pergunta-container">
-                    <p class="pergunta">
-                        Qual é o tamanho da tua casa? 
-                    </p>
-                    <div class="slider-container">
-                        <div class="labels">
-                            <span class="label-min">PEQUENA</span>
-                            <span class="label-max">ENORME</span>
-                        </div>
-                        <input type="range" min="5" max="300" step="5" value="50" class="range-slider range-tamanho" id="rangeTamanho">
-                        <span class="porcentagem-valor" id="valorTamanho">50 m²</span>
-                        <span class="subtexto-slider" id="labelTamanho">Pequena</span>
-                    </div>
-                </div>
-                <button type="button" onclick="nextStep('food-meat')">Próxima Etapa</button>
-
                 <h1>Tens energia elétrica em casa?</h1>
                 <div>
-        <span id="labelNao">NÃO</span>
-            <input type="checkbox" id="toggleSwitch" onchange="alternarToggle()">
-            </label>
-        <span id="labelSim">SIM</span>
-    </div>
+                    <span id="labelNao">NÃO</span>
+                    <input type="checkbox" id="toggleSwitch" onchange="alternarToggle()">
+                    <span id="Sim">SIM</span>
+                </div>
 
-    <p>Estado atual: <strong id="estado">NÃO</strong></p>
-                <hr>
-        </div>
+        
     
  <h2>
     Qual é a percentagem de energia renovável consumida na tua casa? 
