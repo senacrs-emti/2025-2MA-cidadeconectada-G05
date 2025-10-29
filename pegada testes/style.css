@@ -1,3 +1,4 @@
+
 :root {
     --color-primary: #4CAF50; /* Verde Floresta */
     --color-secondary: #8BC34A; /* Verde Lima */
@@ -37,7 +38,7 @@ body {
     text-align: center;
     background-size: cover;
     background-position: center;
-    color: white; 
+    color: white; /* Cor do texto padrão para fundos escuros */
     transition: background-color 0.5s ease, background-image 0.5s ease;
 }
 
@@ -61,22 +62,16 @@ body {
     background-image: linear-gradient(rgba(56, 142, 60, 0.7), rgba(56, 142, 60, 0.7)), url('https://picsum.photos/700/500?random=2'); /* Imagem de fundo sutil de floresta/madeira */
 }
 
-/* Fundo 3: Alimentação - Carne (Impacto) */
 #step-food-meat {
     background-color: #D32F2F; /* Vermelho Alerta/Impacto */
     background-image: linear-gradient(rgba(211, 47, 47, 0.7), rgba(211, 47, 47, 0.7)), url('https://picsum.photos/700/500?random=3'); /* Imagem de fundo sutil de fazenda/pecuária */
 }
 
-/* Fundo 4: Alimentação - Local (Sustentabilidade) */
 #step-food-local {
     background-color: #0097A7; /* Azul Água Limpa */
     background-image: linear-gradient(rgba(0, 151, 167, 0.7), rgba(0, 151, 167, 0.7)), url('https://picsum.photos/700/500?random=4'); /* Imagem de fundo sutil de horta/alimentos frescos */
 }
 
-#step-result {
-    background-color: #4CAF50; 
-    background-image: linear-gradient(rgba(76, 175, 80, 0.8), rgba(76, 175, 80, 0.8)), url('https://picsum.photos/700/500?random=5'); /* Imagem de fundo sutil de paisagem limpa */
-}
 
 
 
@@ -123,7 +118,6 @@ button:hover {
 }
 
 
-
 .slider-container {
     width: 100%;
     margin: 20px 0;
@@ -141,7 +135,6 @@ button:hover {
 
 .range-slider {
     width: 100%;
-    -webkit-appearance: none;
     height: 8px;
     border-radius: 5px;
     background: #ccc;
@@ -181,7 +174,6 @@ button:hover {
     position: relative;
     width: 50px;
     height: 25px;
-    -webkit-appearance: none;
     background: #ccc;
     outline: none;
     border-radius: 25px;
@@ -221,11 +213,68 @@ button:hover {
     font-size: 1.1em;
 }
 
-#final-result {
-    font-size: 2.5em;
+
+#step-result {
+    /* Fundo 5: Resultado (Esperança e Futuro) - Ajustando o fundo para se parecer com o exemplo (céu estrelado) */
+    background-color: #2F4F4F; /* Verde-escuro/Ciano-escuro */
+    background-image: none; /* Remove a imagem de placeholder */
+    color: white;
+}
+
+#step-result p {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-size: 1.1em;
+}
+
+.result-value {
+    font-size: 3em;
     font-weight: bold;
-    margin-top: 30px;
     color: var(--color-secondary);
+    margin: 5px 0;
+}
+
+#earth-display {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 30px 0;
+    max-width: 500px;
+}
+
+.earth-icon {
+    width: 60px; /* Tamanho do globo */
+    height: 60px;
+    margin: 5px;
+    background-image: url('pasted_file_ouu7R3_image.png'); /* Imagem do globo fornecida */
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.earth-icon.partial {
+    position: relative;
+}
+
+.earth-icon.partial::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Overlay para simular a parte "faltante" */
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); /* Será ajustado pelo JS */
+}
+
+#step-result .info-icon {
+    color: var(--color-accent);
+    margin-left: 10px;
+    font-size: 0.8em;
+}
+
+.mt-4 {
+    margin-top: 20px;
 }
 
 .section-title {
@@ -254,6 +303,7 @@ button:hover {
     color: var(--color-accent);
 }
 
+/* Estilos para o range de energia renovável */
 #energiaRange {
     margin: 10px 0;
 }

@@ -17,24 +17,24 @@
                 <label for="option1">
                     <input type="radio" id="option1" name="housing-type" value="sem-agua-potavel">
                     Moradia sem água potável
-                </label><br>
+                </label>
 
                 <label for="option2">
                     <input type="radio" id="option2" name="housing-type" value="com-agua-potavel">
                     Moradia com água potável
-                </label><br>
+                </label>
                 
                 <label for="option4">
                     <input type="radio" id="option4" name="housing-type" value="duplex">
                     Duplex, Moradia em banda ou Edifício com 2-4 habitações
-                </label><br>
+                </label>
 
                 <label for="option5">
                     <input type="radio" id="option5" name="housing-type" value="condominio-luxo">
                     Condomínio de luxo
-                </label><br>
+                </label>
 
-                <button type="button" onclick="nextStep('step-housing-type')">Próxima Etapa</button>
+                <button type="button" onclick="nextStep('housing-type')">Próxima Etapa</button>
             </form>
         </div>
 
@@ -45,81 +45,73 @@
                 <label for="optionmaterial1">
                     <input type="radio" id="optionmaterial1" name="housing-material" value="palha/bambu">
                     Palha/bambu
-                </label><br>
+                </label>
 
                 <label for="optionmaterial2">
                     <input type="radio" id="optionmaterial2" name="housing-material" value="tijolo/cimento">
                     Tijolo/cimento
-                </label><br>
+                </label>
                 
                 <label for="optionmaterial3">
                     <input type="radio" id="optionmaterial3" name="housing-material" value="aço/outro">
                     Aço/outro
-                </label><br>
+                </label>
 
                 <label for="optionmaterial4">
                     <input type="radio" id="optionmaterial4" name="housing-material" value="madeira">
                     Madeira
-                </label><br>
+                </label>
 
                 <label for="optionmaterial5">
                     <input type="radio" id="optionmaterial5" name="housing-material" value="adobe/argila/barro">
                     Adobe/Argila/Barro
                 </label>
 
-                <hr>
+<div class="pergunta-container">
+    <p class="pergunta">
+        Quantas pessoas residem no teu agregado familiar? 
+        <span class="info-icon" title="Mais informações...">ⓘ</span>
+    </p>
 
+    <div class="slider-container">
+        <div class="labels">
+            <span class="label-min">APENAS EU</span>
+            <span class="label-max">10+</span>
+        </div>
+        
+        <input type="range" min="1" max="10" value="2" class="range-slider range-pessoas" id="rangePessoas">
+        
+        <span class="porcentagem-valor" id="valorPessoas">2</span>
+    </div>
+</div>
 
-                
-                <div class="pergunta-container">
-                    <p class="pergunta">
-                        Quantas pessoas residem no teu agregado familiar? 
-                        <span class="info-icon" title="Mais informações...">ⓘ</span>
-                    </p>
+<div class="pergunta-container">
+    <p class="pergunta">
+        Qual é o tamanho da tua casa? 
+        <span class="info-icon" title="Mais informações...">ⓘ</span>
+    </p>
 
-                    <div class="slider-container">
-                        <div class="labels">
-                            <span class="label-min">APENAS EU</span>
-                            <span class="label-max">10+</span>
-                        </div>
-                        
-                        <input type="range" min="1" max="10" value="2" class="range-slider range-pessoas" id="rangePessoas">
-                        
-                        <span class="porcentagem-valor" id="valorPessoas">2</span>
-                    </div>
-                </div>
-                
-                <div class="pergunta-container">
-                    <p class="pergunta">
-                        Qual é o tamanho da tua casa? 
-                        <span class="info-icon" title="Mais informações...">ⓘ</span>
-                    </p>
-
-                    <div class="slider-container">
-                        <div class="labels">
-                            <span class="label-min">PEQUENA</span>
-                            <span class="label-max">ENORME</span>
-                        </div>
-                        
-                        <input type="range" min="5" max="300" step="5" value="50" class="range-slider range-tamanho" id="rangeTamanho">
-                        
-                        <span class="porcentagem-valor" id="valorTamanho">50 m²</span>
-                        <span class="subtexto-slider" id="labelTamanho">Minúscula</span>
-                    </div>
-                </div>
-
-
+    <div class="slider-container">
+        <div class="labels">
+            <span class="label-min">PEQUENA</span>
+            <span class="label-max">ENORME</span>
+        </div>
+        
+        <input type="range" min="5" max="300" step="5" value="50" class="range-slider range-tamanho" id="rangeTamanho">
+        
+        <span class="porcentagem-valor" id="valorTamanho">50 m²</span>
+        <span class="subtexto-slider" id="labelTamanho">Minúscula</span>
+    </div>
+</div>
 
                 <h1>Tens energia elétrica em casa?</h1>
                 <div>
                     <span id="labelNao">NÃO</span>
                     <input type="checkbox" id="toggleSwitch" onchange="alternarToggle()">
-                    <span id="labelSim">SIM</span>
+                    <span id="Sim">SIM</span>
                 </div>
-                <p>Estado atual: <strong id="estado">NÃO</strong></p>
-                <hr>
                 
-                <button type="button" onclick="nextStep('step-housing-material')">Próxima Etapa</button>
+                <button type="button" onclick="nextStep('housing-material')">Próxima Etapa</button>
             </form>
         </div>
 
@@ -138,25 +130,18 @@
                     <p id="meat-label">Muito frequentemente (carne diariamente)</p>
                 </div>
                 
-                <button type="button" onclick="nextStep('step-food-meat')">Próxima Etapa</button>
+                <button type="button" onclick="nextStep('food-meat')">Próxima Etapa</button>
             </form>
         </div>
 
         <div id="step-food-local" class="quiz-step hidden-step">
             <p class="section-title">ALIMENTAÇÃO</p>
-            
-            <form id="food-local-form">
-                <h1>Dos alimentos que você consome qual porcentagem de comida não embalada não processada ou cultivada localmente.</h1>
-                <p class="subtexto">(menos de 320 km de distância)</p>
-                <div class="slider-container">
-                    <div class="labels">
-                        <span class="label-min">NENHUMA</span>
-                        <span class="label-max">TODA</span>
-                    </div>
-                    
-                    <input type="range" min="0" max="100" value="4" class="range-slider" id="rangeAlimentos">
-                    
-                    <span class="porcentagem-valor" id="porcentagemValor">4 %</span>
+            <h1>Dos alimentos que você consome qual porcentagem de comida não embalada não processada ou cultivada localmente.</h1>
+            <p class="subtexto">(menos de 320 km de distância)</p>
+            <div class="slider-container">
+                <div class="labels">
+                    <span class="label-min">NENHUMA</span>
+                    <span class="label-max">TODA</span>
                 </div>
                 
                 <input type="range" min="0" max="100" value="4" class="range-slider" id="rangeAlimentos">
@@ -164,67 +149,72 @@
                 <span class="porcentagem-valor" id="porcentagemValor">4 %</span>
             </div>
 
-          
-                </div>
-                <button type="button" onclick="nextStep('food-meat')">Próxima Etapa</button>
-                <div class="pergunta-container">
+            <button type="button" onclick="nextStep('food-local')">Próxima Etapa</button>
+                 <div class="pergunta-container">
                     <p class="pergunta">
-                     <h1>   Quantas pessoas residem no teu agregado familiar? </h1>
-                        <span class="info-icon" title="Mais informações..."></span>
+                        Quantas pessoas residem no teu agregado familiar? 
                     </p>
-                
                     <div class="slider-container">
                         <div class="labels">
                             <span class="label-min">APENAS EU</span>
                             <span class="label-max">10+</span>
                         </div>
-                        
                         <input type="range" min="1" max="10" value="2" class="range-slider range-pessoas" id="rangePessoas">
-                        
-                        <span class="porcentagem-valor" id="valorPessoas">2</span>
+                        <span class="porcentagem-valor" id="valorPessoas">10+</span>
                     </div>
                 </div>
+
+                <div class="pergunta-container">
+                    <p class="pergunta">
+                        Qual é o tamanho da tua casa? 
+                    </p>
+                    <div class="slider-container">
+                        <div class="labels">
+                            <span class="label-min">PEQUENA</span>
+                            <span class="label-max">ENORME</span>
+                        </div>
+                        <input type="range" min="5" max="300" step="5" value="50" class="range-slider range-tamanho" id="rangeTamanho">
+                        <span class="porcentagem-valor" id="valorTamanho">50 m²</span>
+                        <span class="subtexto-slider" id="labelTamanho">Pequena</span>
+                    </div>
+                </div>
+                <button type="button" onclick="nextStep('food-meat')">Próxima Etapa</button>
+
                 <h1>Tens energia elétrica em casa?</h1>
                 <div>
-                    <span id="labelNao">NÃO</span>
-                    <input type="checkbox" id="toggleSwitch" onchange="alternarToggle()">
-                    <span id="Sim">SIM</span>
-                </div>
+        <span id="labelNao">NÃO</span>
+            <input type="checkbox" id="toggleSwitch" onchange="alternarToggle()">
+            </label>
+        <span id="labelSim">SIM</span>
+    </div>
 
-        
-                <hr>
-
-                <h2>
-                    Qual é a percentagem de energia renovável consumida na tua casa? 
-                    <button id="infoBtn" type="button">i</button>
-                </h2>
-                <p>(Diretamente ou adquirida. Consulte a sua fatura de eletricidade e/ou gás natural)</p>
-
-                <div class="slider-container">
-                    <div class="labels">
-                        <span class="label-min">Baixa</span>
-                        <span class="label-max">Alta</span>
-                    </div>
-                    <input type="range" id="energiaRange" name="energiaRange" min="0" max="100" value="0" />
-                    <div>
-                        <span id="percentValue">0%</span>
-                    </div>
-                </div>
-
-                <button id="set50Btn" type="button">Definir 50%</button>
-                
-                <button type="button" onclick="nextStep('step-food-local')">Próxima Etapa</button>
-            </form>
+    <p>Estado atual: <strong id="estado">NÃO</strong></p>
         </div>
     
-        <div id="step-result" class="quiz-step hidden-step">
+ <h2>
+    Qual é a percentagem de energia renovável consumida na tua casa? 
+    <button id="infoBtn" type="button">i</button>
+  </h2>
+  <p>(Diretamente ou adquirida. Consulte a sua fatura de eletricidade e/ou gás natural)</p>
+
+  <label for="energiaRange">Baixa</label>
+  <input type="range" id="energiaRange" name="energiaRange" min="0" max="100" value="0" />
+  <label for="energiaRange">Alta</label>
+
+  <div>
+    <span id="percentValue">0%</span>
+  </div>
+
+  <button id="set50Btn" type="button">Definir 50%</button>
+
+  
+ 
+
+     <div id="step-result" class="quiz-step hidden-step">
             <h1>Sua Pegada de Carbono Anual é:</h1>
-            <p id="final-result">você precisa de:</p>
-        
+            <p id="final-result">Calculando...</p>
             <button onclick="restartQuiz()">Recalcular</button>
         </div>
-
-    </div>
 
     <script src="script.js"></script>
 </body>
