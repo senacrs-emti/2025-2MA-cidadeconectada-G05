@@ -153,8 +153,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const toggleSwitch = document.getElementById('toggleSwitch');
     if (toggleSwitch) {
         toggleSwitch.addEventListener('change', alternarToggle);
-        // Chamada inicial para definir o estado visual correto
-        // Nota: O HTML original não tinha um 'estado' inicial, então vamos garantir que ele seja inicializado.
         alternarToggle(); 
     }
 
@@ -212,7 +210,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
             });
         }
 
-        // Inicializa visualização
         updateEnergiaRange(energiaRange.value);
     }
 });
