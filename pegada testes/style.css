@@ -1,8 +1,9 @@
 
+
 :root {
     --color-primary: #4CAF50; 
     --color-secondary: #8BC34A; 
-    --color-accent: #00BCD4; 
+    --color-accent: #00BCD4;
     --color-text: #333;
     --color-background-light: #f4f4f9;
 }
@@ -28,6 +29,7 @@ body {
     transition: all 0.5s ease-in-out;
 }
 
+
 .quiz-step {
     padding: 40px;
     min-height: 400px;
@@ -51,29 +53,25 @@ body {
     font-size: 2em;
     margin-bottom: 20px;
 }
-
 #step-housing-type {
     background-color: #A1887F; 
-    background-image: linear-gradient(rgba(161, 136, 127, 0.7), rgba(161, 136, 127, 0.7)), url(''); /* Imagem de fundo sutil de construção/terra */
+    background-image: linear-gradient(rgba(161, 136, 127, 0.7), rgba(161, 136, 127, 0.7)), url('https://picsum.photos/700/500?random=1'); 
 }
 
 
 #step-housing-material {
     background-color: #388E3C;
-    background-image: linear-gradient(rgba(56, 142, 60, 0.7), rgba(56, 142, 60, 0.7)), url(''); /* Imagem de fundo sutil de floresta/madeira */
+    background-image: linear-gradient(rgba(56, 142, 60, 0.7), rgba(56, 142, 60, 0.7)), url('https://picsum.photos/700/500?random=2'); 
 }
-
 
 #step-food-meat {
     background-color: #D32F2F; 
-    background-image: linear-gradient(rgba(211, 47, 47, 0.7), rgba(211, 47, 47, 0.7)), url(''); /* Imagem de fundo sutil de fazenda/pecuária */
-}
-
+    background-image: linear-gradient(rgba(211, 47, 47, 0.7), rgba(211, 47, 47, 0.7)), url('https://picsum.photos/700/500?random=3'); 
 
 #step-food-local {
-    background-color: #0097A7; 
-    background-image: linear-gradient(rgba(0, 151, 167, 0.7), rgba(0, 151, 167, 0.7)), url(''); /* Imagem de fundo sutil de horta/alimentos frescos */
-
+    background-color: #0097A7; /* Azul Água Limpa */
+    background-image: linear-gradient(rgba(0, 151, 167, 0.7), rgba(0, 151, 167, 0.7)), url('https://picsum.photos/700/500?random=4'); 
+}
 
 
 
@@ -267,10 +265,10 @@ button:hover {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5); 
-
     clip-path: polygon(var(--clip-percentage) 0, 100% 0, 100% 100%, var(--clip-percentage) 100%);
     transition: clip-path 0.5s ease-out;
 }
+
 
 #step-result .info-icon {
     color: var(--color-accent);
@@ -297,6 +295,7 @@ button:hover {
     margin-bottom: 20px;
 }
 
+
 .hidden-step {
     display: none !important;
 }
@@ -307,6 +306,7 @@ button:hover {
     font-style: normal;
     color: var(--color-accent);
 }
+
 
 #energiaRange {
     margin: 10px 0;
