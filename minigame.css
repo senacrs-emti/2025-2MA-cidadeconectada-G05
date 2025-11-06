@@ -7,6 +7,7 @@ body {
     height: 100vh;
     margin: 0;
     overflow: hidden;
+    
 }
 
 #placar {
@@ -44,7 +45,6 @@ body {
     background: #ff6600;
 }
 
-/* Tela do jogo */
 #tela {
     position: relative;
     width: 1000px;
@@ -55,7 +55,6 @@ body {
     overflow: hidden;
 }
 
-/* Canvas da trajetória */
 #trajetoria {
     position: absolute;
     top: 0;
@@ -65,7 +64,6 @@ body {
     pointer-events: none;
 }
 
-/* Bola */
 #bola {
     position: absolute;
     width: 60px;
@@ -76,7 +74,6 @@ body {
     background: url('https://static.vecteezy.com/system/resources/thumbnails/011/993/483/small/white-crumpled-paper-balls-for-design-element-png.png') center/cover no-repeat;
 }
 
-/* Cesta */
 #cesta {
     position: absolute;
     width: 100px;
@@ -86,8 +83,8 @@ body {
     top: 100px;
     right: 100px;
     transition: transform 0.5s ease, top 0.5s ease, left 0.5s ease;
+    
 }
-/* Cestas extras */
 #cesta2, #cesta3, #cesta4 {
     position: absolute;
     width: 100px;

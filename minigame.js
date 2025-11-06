@@ -6,10 +6,10 @@ window.addEventListener('load', () => {
     const resetBtn = document.getElementById('resetar');
   
     const cestas = [
-      { el: document.getElementById('cesta'), pontos: 1 },
+      { el: document.getElementById('cesta'), pontos: 2 },
       { el: document.createElement('div'), pontos: 2, img: 'https://static.vecteezy.com/system/resources/previews/024/089/832/non_2x/green-waste-bin-ecology-free-png.png' },
       { el: document.createElement('div'), pontos: -3, img: 'https://png.pngtree.com/png-vector/20240811/ourmid/pngtree-garbage-basket-full-of-on-transparent-background-ai-generated-png-image_13446676.png' },
-      { el: document.createElement('div'), pontos: 4, img: 'https://cdn-icons-png.flaticon.com/512/833/833314.png' },
+      { el: document.createElement('div'), pontos: -2, img: 'https://images.vexels.com/media/users/3/318800/isolated/preview/78e5b63932610a7fae48acc27847dc03-lata-de-lixo-para-a-limpeza-da-casa.png' },
     ];
   
     for (let i = 1; i < cestas.length; i++) {
@@ -70,7 +70,6 @@ window.addEventListener('load', () => {
       cesta.el.style.transform = `rotate(${ang}deg)`;
     }
   
-    // Inicializa todas as cestas
     cestas.forEach(c => moverCestaAleatoria(c));
   
     function clientToLocal(clientX, clientY) {
@@ -83,34 +82,18 @@ window.addEventListener('load', () => {
   
     const ctx = linha.getContext('2d');
   
-    function desenharTrajetoria(endX, endY) {
-      ctx.clearRect(0, 0, WIDTH, HEIGHT);
-      const origemX = x + bola.clientWidth / 2;
-      const origemY = y + bola.clientHeight / 2;
-      let dx = endX - origemX;
-      let dy = endY - origemY;
-      const dist = Math.sqrt(dx*dx + dy*dy);
-      const forceRatio = Math.min(1, dist / 200);
-      const force = forceRatio * MAX_FORCE;
-      const ux = dx / (dist || 1);
-      const uy = dy / (dist || 1);
-      let simVX = ux * force;
-      let simVY = uy * force;
-      let tempX = origemX, tempY = origemY;
-      let stepVX = simVX * 0.25, stepVY = simVY * 0.25;
-      const g = gravity * 0.25;
-      ctx.fillStyle = 'rgba(255,50,50,0.95)';
-      const steps = 40;
-      for (let i = 0; i < steps; i++) {
-        tempX += stepVX;
-        tempY += stepVY;
-        stepVY += g;
-        if (tempX < -50 || tempX > WIDTH + 50 || tempY > HEIGHT + 50) break;
-        ctx.beginPath();
-        ctx.arc(tempX, tempY, 3, 0, Math.PI*2);
-        ctx.fill();
-      }
-    }
+    function desenharTrajetoria(endX, endY) { ctx.clearRect(0, 0, WIDTH, HEIGHT); 
+    const origemX = x + bola.clientWidth / 2; const origemY = y + bola.clientHeight / 2; 
+    
+    let dx = endX - origemX; let dy = endY - origemY; 
+    const dist = Math.sqrt(dx*dx + dy*dy); const forceRatio = Math.min(1, dist / 200); 
+    const force = forceRatio * MAX_FORCE; 
+    const ux = dx / (dist || 1); const uy = dy / (dist || 1); 
+    let simVX = ux * force; let simVY = uy * force; 
+    let tempX = origemX; let tempY = origemY; let stepVX = simVX * 0.25; 
+    let stepVY = simVY * 0.25; const g = gravity * 0.12; ctx.fillStyle = 'rgba(255,50,50,0.95)'; 
+    const steps = 40; for (let i = 0; i < steps; i++) { tempX += stepVX; tempY += stepVY; stepVY += g; 
+    if (tempX < -50 || tempX > WIDTH + 50 || tempY > HEIGHT + 50) break; ctx.beginPath(); ctx.arc(tempX, tempY, 3, 0, Math.PI*2); ctx.fill(); } }
   
     function startAiming(clientX, clientY) {
       if (inAir) return;
@@ -209,7 +192,6 @@ window.addEventListener('load', () => {
       requestAnimationFrame(stepAnim);
     }
   
-    // Eventos mouse/touch
     tela.addEventListener('mousedown', (ev) => startAiming(ev.clientX, ev.clientY));
     window.addEventListener('mousemove', (ev) => updateAiming(ev.clientX, ev.clientY));
     window.addEventListener('mouseup', (ev) => releaseAiming(ev.clientX, ev.clientY));
@@ -224,7 +206,7 @@ window.addEventListener('load', () => {
       placeBall(100, HEIGHT - 120);
       ctx.clearRect(0,0,WIDTH,HEIGHT);
     }
-    resetBtn.addEventListener('click', resetarBola);
+    rmesetBtn.addEventListener('click', resetarBola);
   
     window.addEventListener('mouseleave', () => {
       if (aiming) {
@@ -237,32 +219,9 @@ window.addEventListener('load', () => {
   
     requestAnimationFrame(() => placeBall(100, HEIGHT - 120));
   });
-  // adicionando cestas extras
-const cestas = [
-    { el: document.getElementById('cesta'), pontos: 1 },
-    { el: document.getElementById('cesta2'), pontos: 2 },
-    { el: document.getElementById('cesta3'), pontos: 3 },
-    { el: document.getElementById('cesta4'), pontos: 4 }
-  ];
+
+
   
-  // mover uma cesta aleatória (somente a que foi acertada)
-  function moverCestaAleatoria(cesta) {
-    const pad = 20;
-    const minLeft = WIDTH / 2; // parte direita
-    const maxLeft = WIDTH - cesta.el.clientWidth - pad;
-    const maxTop = Math.floor(HEIGHT / 2);
-    const left = minLeft + Math.random() * (maxLeft - minLeft);
-    const top = Math.random() * maxTop;
-    cesta.el.style.left = left + 'px';
-    cesta.el.style.top = top + 'px';
-    const ang = (Math.random() * 20) - 10;
-    cesta.el.style.transform = `rotate(${ang}deg)`;
-  }
-  
-  // inicializa todas as cestas
-  cestas.forEach(cesta => moverCestaAleatoria(cesta));
-  
-  // na animação principal, verifica colisão para todas as cestas
   function stepAnim() {
     if (!inAir) return;
   
@@ -303,7 +262,7 @@ const cestas = [
           bolaRect.top < cestaLocal.bottom - 10) {
         pontos += cesta.pontos;
         placarEl.textContent = pontos;
-        moverCestaAleatoria(cesta); // somente a cesta acertada se move
+        moverCestaAleatoria(cesta); 
         resetarBola();
         return;
       }
@@ -311,4 +270,4 @@ const cestas = [
   
     requestAnimationFrame(stepAnim);
   }
-  
+ 
