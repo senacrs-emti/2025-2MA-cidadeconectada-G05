@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', (event) => {
   
+    
     function updateSliderFill(slider, value) {
         const min = parseInt(slider.min) || 0;
         const max = parseInt(slider.max) || 100;
@@ -16,6 +17,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
 
 
+ 
     const steps = [
         'step-housing-type',
         'step-housing-material',
@@ -319,10 +321,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
             updateEnergiaRange(e.target.value);
         });
 
-0        if (set50Btn) {
+        if (set50Btn) {
             set50Btn.addEventListener('click', () => {
                 energiaRange.value = 50;
-                updateEnergiaRange(50); 
+                updateEnergiaRange(50);
+            });
         }
 
         }
