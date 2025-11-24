@@ -56,7 +56,7 @@ window.addEventListener('load', () => {
       <form action="conn.php" method="POST">
         <input type="hidden" name="score" value="${pontos}">
         <label for="nome">Digite seu nome:</label>
-        <input type="text" id="nome" name="nome" required>
+        <input type="text" id="nome" name="nome" required autocomplete="off">
         <button type="submit">Salvar Placar</button>
       </form>
       <button id="reiniciar">Jogar Novamente</button>
