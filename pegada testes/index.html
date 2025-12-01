@@ -97,13 +97,12 @@
                     <span class="subtexto-slider" id="labelTamanho">Minúscula</span>
                 </div>
             </div>
-
             <h1>Tens energia elétrica em casa?</h1>
-            <div>
-                <span>NÃO</span>
-                <input type="checkbox" id="toggleSwitch" onchange="alternarToggle()" />
-                <span>SIM</span>
-            </div>
+               <div>
+        <label for="toggleSwitch" id="labelNao">NÃO</label> 
+        <input type="checkbox" id="toggleSwitch" onchange="alternarToggle()" />
+        <label for="toggleSwitch" id="labelSim">SIM</label>
+          </div>
             <p>Estado atual: <strong id="estado">NÃO</strong></p>
 
             <button class="next-btn" type="button" onclick="nextStep('step-housing-material')">Próxima Etapa</button>
@@ -151,6 +150,8 @@
             <h1>Sua Pegada de Carbono Anual é:</h1>
             <p id="final-result">Calculando...</p>
             <p class="small-info">CO2e — dióxido de carbono equivalente</p>
+            <h2 class="ref-title">Valor de Referência Sustentável Anual:</h2>
+            <p id="ref-result">4,8 Toneladas de CO2e</p> 
 
             <button class="restart-btn" onclick="restartQuiz()">Recalcular</button>
         </div>

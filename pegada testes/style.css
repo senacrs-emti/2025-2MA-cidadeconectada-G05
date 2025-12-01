@@ -395,3 +395,21 @@ input[type="radio"]:checked + label {
     left: 750px;
     bottom: 24px;
 }
+.ref-title {
+    margin-top: 30px; 
+    font-size: 28px; 
+    font-weight: 700;
+    color: var(--color-text); 
+    text-align: center;
+    font-family: 'Poppins', sans-serif; 
+}
+
+#ref-result {
+    font-size: 34px; 
+    font-weight: 700;
+    color: var(--color-primary);
+    text-align: center;
+    margin-top: 10px;
+    font-family: 'Poppins', sans-serif;
+}
+
