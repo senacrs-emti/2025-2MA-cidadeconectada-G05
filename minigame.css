@@ -1,95 +1,92 @@
-body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: radial-gradient(circle at center, #1e1e1e, #000);
-    height: 100vh;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+:root {
+    --color-primary: #2e7d32;
+    --color-secondary: #66bb6a;
+    --color-background: #e8f5e9;
+    --color-text: #eaf6ea;
+    --shadow-1: 0 6px 20px rgba(14,52,23,0.10);
+    --shadow-2: 0 18px 50px rgba(8,38,14,0.45);
+}
+
+html, body {
+    height: 100%;
     margin: 0;
+    background: #000;
+    font-family: 'Poppins', sans-serif;
     overflow: hidden;
-}
-
-#placar {
-    background: black;
-    color: white;
-    font-family: "Courier New", monospace;
-    font-size: 28px;
-    padding: 15px 25px;
-    border-radius: 8px;
-    margin-bottom: 15px;
     display: flex;
+    justify-content: center;
     align-items: center;
-    gap: 20px;
-    box-shadow: 0 0 15px #ff4400;
-}
-
-#placar span {
-    letter-spacing: 2px;
-}
-
-#resetar {
-    background: #ff4400;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 18px;
-    transition: 0.2s;
-    position:relative;
-
-}
-
-#resetar:hover {
-    background: #ff6600;
 }
 
 #tela {
+    width: 96vw;
+    max-width: 1100px;
+    height: 80vh;
+    max-height: 720px;
+    background: linear-gradient(180deg, rgba(246,255,246,0.95), rgba(225,250,225,0.98));
+    border-radius: 18px;
+    box-shadow: 0 30px 70px rgba(0,0,0,0.6);
     position: relative;
-    width: 1000px;
-    height: 600px;
-    background: url('20b127a2-9c02-4d45-917e-a8d015abbce9.png') center/cover no-repeat;
-    border: 6px solid #222;
-    border-radius: 12px;
     overflow: hidden;
+    border: 1px solid rgba(40,120,40,0.12);
 }
+
 
 #trajetoria {
     position: absolute;
-    top: 0;
-    left: 0;
+    inset: 0;
     width: 100%;
     height: 100%;
     pointer-events: none;
 }
+#placar {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255,255,255,0.92);
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-primary);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+    border: 1px solid rgba(60,140,60,0.12);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+}
+#cesta, #cesta2, #cesta3, #cesta4 {
+    width: 10%;
+    min-width: 70px;
+    max-width: 110px;
+    aspect-ratio: 1 / 1;
+    position: absolute;
+    bottom: 3%;
+    border-radius: 16px;
+    transition: transform 0.2s;
+}
+
+#cesta  { left: 6%;  }
+#cesta2 { left: 28%; }
+#cesta3 { left: 55%; }
+#cesta4 { left: 78%; }
+
+#cesta:hover, #cesta2:hover, #cesta3:hover, #cesta4:hover {
+    transform: translateY(-5px) scale(1.03);
+}
 
 #bola {
+    width: 6%;
+    min-width: 45px;
+    max-width: 70px;
+    aspect-ratio: 1 / 1;
     position: absolute;
-    width: 60px;
-    height: 60px;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
     border-radius: 50%;
-    bottom: 60px;
-    left: 100px;
-    background: url('https://static.vecteezy.com/system/resources/thumbnails/011/993/483/small/white-crumpled-paper-balls-for-design-element-png.png') center/cover no-repeat;
+    background: radial-gradient(circle at 30% 30%, #fff 20%, var(--color-secondary));
+    box-shadow: 0 12px 40px rgba(0,0,0,0.30);
 }
-
-#cesta {
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    background: url('https://cdn.pixabay.com/photo/2013/07/13/01/23/recycle-bin-155650_1280.png') center/contain no-repeat;
-    pointer-events: none;
-    top: 100px;
-    right: 100px;
-    transition: transform 0.5s ease, top 0.5s ease, left 0.5s ease;
-    
-}
-#cesta2, #cesta3, #cesta4 {
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    pointer-events: none;
-    transition: transform 0.5s ease, top 0.5s ease, left 0.5s ease;
-}
-
-

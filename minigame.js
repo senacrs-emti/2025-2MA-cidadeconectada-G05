@@ -71,6 +71,7 @@ window.addEventListener('load', () => {
 
   const cestas = [
     { el: document.getElementById('cesta'), pontos: 2 },
+    { el: document.createElement('div'), pontos: 2, img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQt45xqOGl-k-MmQh7KwexoDXsvJn2JnqM2Hg&s' },
     { el: document.createElement('div'), pontos: 2, img: 'https://static.vecteezy.com/system/resources/previews/024/089/832/non_2x/green-waste-bin-ecology-free-png.png' },
     { el: document.createElement('div'), pontos: -3, img: 'https://png.pngtree.com/png-vector/20240811/ourmid/pngtree-garbage-basket-full-of-on-transparent-background-ai-generated-png-image_13446676.png' },
     { el: document.createElement('div'), pontos: -2, img: 'https://images.vexels.com/media/users/3/318800/isolated/preview/78e5b63932610a7fae48acc27847dc03-lata-de-lixo-para-a-limpeza-da-casa.png' },
