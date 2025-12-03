@@ -1,0 +1,335 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+:root {
+    --color-primary: #2e7d32;
+    --color-secondary: #66bb6a;
+    --color-background: #e8f5e9;
+    --color-card: #ffffff;
+    --color-text: #1b5e20;
+    --color-accent: #a5d6a7;
+
+    --img-hero: url('images/forest-hero.jpg');
+    --img-leaf: url('images/leaf.svg');
+
+    --shadow-1: 0 6px 20px rgba(14, 52, 23, 0.08);
+    --shadow-2: 0 10px 40px rgba(14, 52, 23, 0.10);
+}
+
+* { 
+    box-sizing: border-box;
+}
+html, body { height: 100%; }
+body {
+    font-family: 'Poppins', Arial, sans-serif;
+    background: radial-gradient(circle at 10% 10%, rgba(165,214,167,0.18), transparent 15%),
+                linear-gradient(180deg, var(--color-background) 0%, #f5fff5 100%);
+    margin: 0;
+    padding: 0;
+    color: var(--color-text);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+.header-wrap {
+    position: relative;
+    overflow: hidden;
+}
+header {
+    text-align: center;
+    padding: 36px 20px 80px;
+    background-image: linear-gradient(180deg, rgba(46,125,50,0.12), rgba(255,255,255,0.02)), var(--img-hero);
+    background-size: cover;
+    background-position: center center;
+    color: white;
+}
+
+header::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(11,41,16,0.35), rgba(11,41,16,0.08));
+    pointer-events: none;
+}
+
+.eco-logo {
+    width: 104px;
+    height: 104px;
+    border-radius: 50%;
+    padding: 12px;
+    background: rgba(255,255,255,0.12);
+    display: inline-block;
+    z-index: 1;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+    transform: translateY(-4px);
+}
+
+.main-title {
+    margin-top: 12px;
+    color: white;
+    font-size: 34px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    text-shadow: 0 6px 18px rgba(0,0,0,0.35);
+    z-index: 1;
+    position: relative;
+}
+
+.header-subtitle {
+    margin-top: 8px;
+    color: rgba(65, 123, 13, 0.53);
+    font-weight: 500;
+    z-index: 1;
+}
+
+#calculator-container {
+    max-width: 880px;
+    margin: -60px auto 48px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.95));
+    border-radius: 20px;
+    padding: 36px;
+    box-shadow: var(--shadow-2);
+    animation: fadeSlide 0.6s ease;
+    position: relative;
+    overflow: visible;
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(37, 128, 43, 0.06);
+}
+
+#calculator-container::before,
+#calculator-container::after {
+    content: '';
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    background-image: var(--img-leaf);
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.18;
+    pointer-events: none;
+}
+#calculator-container::before {
+    top: -40px;
+    left: -40px;
+    transform: rotate(-18deg);
+    animation: sway 6s ease-in-out infinite;
+}
+#calculator-container::after {
+    bottom: -40px;
+    right: -40px;
+    transform: rotate(14deg) scaleX(-1);
+    animation: sway 7s ease-in-out infinite;
+}
+
+.quiz-step {
+    display: none;
+    opacity: 0;
+    transform: translateY(18px);
+    transition: 0.45s cubic-bezier(.2,.9,.2,1);
+}
+
+.active-step {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.step-image {
+    width: 120px;
+    height: 120px;
+    display: block;
+    margin: 10px auto 18px;
+    border-radius: 16px;
+    object-fit: cover;
+    box-shadow: var(--shadow-1);
+    border: 4px solid rgba(255,255,255,0.6);
+}
+
+label {
+    display: block;
+    background: linear-gradient(180deg, rgba(246,255,246,0.9), rgba(235,250,235,0.85));
+    padding: 14px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    border: 1px solid rgba(120,180,120,0.18);
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+label:hover {
+    transform: translateY(-6px) scale(1.01);
+    background: linear-gradient(180deg, rgba(230,250,230,1), rgba(215,245,215,1));
+    box-shadow: 0 14px 34px rgba(20,80,20,0.06);
+}
+
+input[type="range"] {
+    width: 100%;
+    margin: 12px 0 6px;
+    accent-color: var(--color-primary);
+}
+
+.slider-block {
+    margin-top: 22px;
+}
+
+button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 12px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.25s ease;
+    font-weight: 600;
+}
+
+.next-btn {
+    background: linear-gradient(90deg, var(--color-primary), #1b7328 60%);
+    color: white;
+    width: 100%;
+    margin-top: 20px;
+    box-shadow: 0 8px 20px rgba(12, 56, 17, 0.18);
+    background-size: 200% 100%;
+}
+
+.next-btn:hover {
+    background-position: 100% 0;
+    transform: translateY(-3px) scale(1.01);
+}
+
+.small-btn {
+    background: linear-gradient(90deg, var(--color-secondary), #5fb45d);
+    color: white;
+    margin-top: 10px;
+}
+
+.restart-btn {
+    background: linear-gradient(90deg, #ff8a65, #ff7043);
+    color: white;
+    margin-top: 18px;
+}
+.restart-btn:hover { transform: translateY(-3px); }
+
+.info-btn {
+    background: var(--color-secondary);
+    border-radius: 50%;
+    padding: 6px 10px;
+    color: #fff;
+}
+
+.result-image {
+    width: 140px;
+    margin: 20px auto;
+    display: block;
+    border-radius: 12px;
+    box-shadow: var(--shadow-1);
+}
+
+#final-result {
+    font-size: 34px;
+    font-weight: 700;
+    color: var(--color-primary);
+    text-align: center;
+}
+
+.small-info { font-size: 14px; opacity: 0.85; }
+
+.eco-progress {
+    height: 10px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, rgba(200,240,200,0.6), rgba(180,235,185,0.6));
+    overflow: hidden;
+    box-shadow: inset 0 -2px 6px rgba(0,0,0,0.03);
+}
+.eco-progress > i {
+    display: block;
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+    transition: width 0.8s cubic-bezier(.2,.9,.2,1);
+}
+
+input[type="radio"]:checked + label {
+    border: 2px solid var(--color-primary);
+    background: linear-gradient(180deg, rgba(245,255,245,0.95), rgba(235,250,235,0.95));
+    box-shadow: 0 16px 34px rgba(30,110,40,0.07);
+}
+
+.floating-leaf {
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    background-image: var(--img-leaf);
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.9;
+    pointer-events: none;
+    animation: floatLeaf linear infinite;
+}
+
+@keyframes floatLeaf {
+    from { transform: translateY(-20px) rotate(0deg) scale(0.9); opacity: 0.95 }
+    50%   { transform: translateY(10px) rotate(30deg) scale(1.05); opacity: 0.6 }
+    to   { transform: translateY(-20px) rotate(0deg) scale(0.9); opacity: 0.95 }
+}
+
+@keyframes sway {
+    0%,100% { transform: rotate(-6deg); }
+    50%     { transform: rotate(6deg); }
+}
+
+.fade-in { animation: fadeSlide 0.6s ease; }
+@keyframes fadeSlide {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 900px) {
+    header { padding: 28px 18px 48px; }
+    .main-title { font-size: 28px; }
+    #calculator-container { margin: -40px 18px 24px; padding: 22px; }
+    .step-image { width: 100px; height: 100px; }
+}
+
+@media (max-width: 520px) {
+    .main-title { font-size: 22px; }
+    .eco-logo { width: 64px; height: 64px; }
+    button { font-size: 16px; }
+}
+
+.eco-hero-image {
+    width: 100%;
+    height: 270px;
+    border-radius: 12px;
+    object-fit: cover;
+    display: block;
+    box-shadow: var(--shadow-1);
+}
+
+.eco-photo-card {
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+}
+.eco-photo-card::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.06));
+    pointer-events: none;
+}
+
+.eco-badge {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 48px; height: 48px; border-radius: 50%;
+    background: linear-gradient(180deg,#f3fff3, #e9ffee);
+    border: 1px solid rgba(70,160,80,0.08);
+    box-shadow: 0 6px 18px rgba(18,66,24,0.06);
+}
+
+.ajuste-meat{
+    position: relative;
+    left: 660px;
+    bottom: 24px;
+}
+.ajuste-PRODUÇÃO{
+    position: relative;
+    left: 750px;
+    bottom: 24px;
+}
