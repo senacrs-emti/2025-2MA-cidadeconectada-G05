@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoVida - Juntos por um Planeta Sustentável</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                        <path d="M2 17l10 5 10-5"/>
+                        <path d="M2 12l10 5 10-5"/>
+                    </svg>
+                    <span class="logo-text">EcoVida</span>
+                </div>
+                <nav class="nav">
+                    <a href="#home" class="nav-link">Início</a>
+                    <a href="#features" class="nav-link">Recursos</a>
+                    <a href="#map" class="nav-link">Mapa</a>
+                    <a href="#about" class="nav-link">Sobre</a>
+                </nav>
+            </div>
+        </div>
+    </header>MEEU DEUS AIROLDI
+    <section id="home" class="hero">
+        <div class="hero-background"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Transforme o Mundo com Pequenas Ações</h1>
+                <p class="hero-description">
+                    Junte-se à nossa comunidade e faça a diferença. Registre pontos de coleta, 
+                    reporte problemas ambientais e ajude a construir um futuro mais sustentável.
+                </p>
+                <div class="hero-stats">
+                    <div class="stat-card">
+                        <div class="stat-number">1</div>
+                        <div class="stat-label">Usuários Ativos</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">1</div>
+                        <div class="stat-label">Pontos Ecológicos</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">4</div>
+                        <div class="stat-label">Reportes Resolvidos</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="actions">
+        <div class="container">
+            <div class="actions-grid">
+                <button class="action-card" onclick="openModal('registerModal')">
+                    <div class="action-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="8.5" cy="7" r="4"/>
+                            <line x1="20" y1="8" x2="20" y2="14"/>
+                            <line x1="23" y1="11" x2="17" y2="11"/>
+                        </svg>
+                    </div>
+                    <h3 class="action-title">Cadastro</h3>
+                    <p class="action-description">Crie sua conta e faça parte da mudança</p>
+                </button>
+
+                <button class="action-card" onclick="openModal('reportModal')">
+                    <div class="action-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                            <line x1="12" y1="9" x2="12" y2="13"/>
+                            <line x1="12" y1="17" x2="12.01" y2="17"/>
+                        </svg>
+                    </div>
+                    <h3 class="action-title">Reportar Problema</h3>
+                    <p class="action-description">Denuncie problemas ambientais na sua região</p>
+                </button>
+
+                <button class="action-card" onclick="openModal('ecoPointModal')">
+                    <div class="action-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                            <circle cx="12" cy="10" r="3"/>
+                        </svg>
+                    </div>
+                    <h3 class="action-title">Ponto Ecológico</h3>
+                    <p class="action-description">Registre novos pontos de coleta seletiva</p>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">Como Funciona</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-number">01</div>
+                    <h3 class="feature-title">Cadastre-se</h3>
+                    <p class="feature-description">
+                        Crie sua conta gratuitamente e tenha acesso a todos os recursos da plataforma.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-number">02</div>
+                    <h3 class="feature-title">Explore o Mapa</h3>
+                    <p class="feature-description">
+                        Encontre pontos de coleta seletiva e reciclagem próximos a você.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-number">03</div>
+                    <h3 class="feature-title">Contribua</h3>
+                    <p class="feature-description">
+                        Reporte problemas, adicione novos pontos e ajude a comunidade.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-number">04</div>
+                    <h3 class="feature-title">Faça a Diferença</h3>
+                    <p class="feature-description">
+                        Acompanhe seu impacto e inspire outros a cuidar do meio ambiente.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="map" class="map-section">
+        <div class="container">
+            <h2 class="section-title">Pontos Ecológicos na Sua Região</h2>
+            <p class="section-description">
+                Clique nos marcadores para ver informações sobre cada ponto de coleta
+            </p>
+            <div class="map-container">
+                <div id="ecoMap" class="eco-map"></div>
+                <div id="mapInfo" class="map-info">
+                    <h3 class="map-info-title">Selecione um ponto no mapa</h3>
+                    <p class="map-info-text">Clique em qualquer marcador para ver mais informações</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="logo">
+                        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                            <path d="M2 17l10 5 10-5"/>
+                            <path d="M2 12l10 5 10-5"/>
+                        </svg>
+                        <span class="logo-text">EcoVida</span>
+                    </div>
+                    <p class="footer-text">Juntos por um planeta mais sustentável e consciente.</p>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Links Rápidos</h4>
+                    <a href="#home" class="footer-link">Início</a>
+                    <a href="#features" class="footer-link">Recursos</a>
+                    <a href="#map" class="footer-link">Mapa</a>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Contato</h4>
+                    <a href="mailto:contato@ecovida.com" class="footer-link">86895133020@senacrs.edu.br</a>
+                    <a href="tel:+5511999999999" class="footer-link">+55 51 982810409</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="registerModal" class="modal">
+        <div class="modal-overlay" onclick="closeModal('registerModal')"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Cadastro</h2>
+                <button class="modal-close" onclick="closeModal('registerModal')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+            <form class="modal-form" onsubmit="handleRegister(event)">
+                <div class="form-group">
+                    <label class="form-label">Nome Completo</label>
+                    <input type="text" class="form-input" placeholder="Digite seu nome" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-input" placeholder="seu@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Telefone</label>
+                    <input type="tel" class="form-input" placeholder="(11) 99999-9999" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Senha</label>
+                    <input type="password" class="form-input" placeholder="Mínimo 8 caracteres" required>
+                </div>
+                <button type="submit" class="btn-primary">Criar Conta</button>
+            </form>
+        </div>
+    </div>
+
+    
+    <div id="reportModal" class="modal">
+        <div class="modal-overlay" onclick="closeModal('reportModal')"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Reportar Problema Ambiental</h2>
+                <button class="modal-close" onclick="closeModal('reportModal')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+            <form class="modal-form" onsubmit="handleReport(event)">
+                <div class="form-group">
+                    <label class="form-label">Tipo de Problema</label>
+                    <select class="form-input" required>
+                        <option value="">Selecione...</option>
+                        <option value="lixo">Descarte Irregular de Lixo</option>
+                        <option value="poluicao">Poluição de Água/Ar</option>
+                        <option value="desmatamento">Desmatamento</option>
+                        <option value="queimada">Queimada</option>
+                        <option value="outro">Outro</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Localização</label>
+                    <input type="text" class="form-input" placeholder="Endereço ou referência" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Descrição</label>
+                    <textarea class="form-textarea" rows="4" placeholder="Descreva o problema em detalhes..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Seu Email (para acompanhamento)</label>
+                    <input type="email" class="form-input" placeholder="seu@email.com" required>
+                </div>
+                <button type="submit" class="btn-primary">Enviar Reporte</button>
+            </form>
+        </div>
+    </div>
+
+    
+    <div id="ecoPointModal" class="modal">
+        <div class="modal-overlay" onclick="closeModal('ecoPointModal')"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Registrar Ponto Ecológico</h2>
+                <button class="modal-close" onclick="closeModal('ecoPointModal')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+            <form class="modal-form" onsubmit="handleEcoPoint(event)">
+                <div class="form-group">
+                    <label class="form-label">Nome do Local</label>
+                    <input type="text" class="form-input" placeholder="Ex: Ecoponto Central" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Tipo de Coleta</label>
+                    <select class="form-input" required>
+                        <option value="">Selecione...</option>
+                        <option value="plastico">Plástico</option>
+                        <option value="papel">Papel e Papelão</option>
+                        <option value="vidro">Vidro</option>
+                        <option value="metal">Metal</option>
+                        <option value="eletronicos">Eletrônicos</option>
+                        <option value="organico">Orgânico</option>
+                        <option value="todos">Todos os Tipos</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Endereço Completo</label>
+                    <input type="text" class="form-input" placeholder="Rua, número, bairro, cidade" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Horário de Funcionamento</label>
+                    <input type="text" class="form-input" placeholder="Ex: Seg-Sex 8h-18h" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Informações Adicionais</label>
+                    <textarea class="form-textarea" rows="3" placeholder="Observações importantes..."></textarea>
+                </div>
+                <button type="submit" class="btn-primary">Registrar Ponto</button>
+            </form>
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>
