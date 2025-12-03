@@ -413,3 +413,6 @@ input[type="radio"]:checked + label {
     font-family: 'Poppins', sans-serif;
 }
 
+#toggleSwitch{
+    height: 0px;
+}
