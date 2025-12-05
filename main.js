@@ -1,214 +1,114 @@
-//FAZER ALTERAÇÕES NOS LOCAIS, REDIRECIONAMENTOS E MAPAS!!!!!!!!
-
-//APENAS EXEMPLOS ABAIXO
 const ecoPoints = [
   {
     id: 1,
-    name: "Ecoponto Central",
-    type: "Todos os Tipos",
-    address: "Av. Principal, 1000 - Centro",
-    hours: "Seg-Sex 8h-18h, Sáb 8h-12h",
-    position: { top: "30%", left: "25%" },
+    name: "UDC BERNARDINO SILVEIRA DE AMORIM",
+    address: "Av. Bernardino Silveira de Amorim, 2261 - Rubem Berta",
+    hours: "Seg–Sex 08h–17h • Sáb/Feriados 08h–12h",
+    lat: -30.008070,
+    lng: -51.106870
   },
   {
     id: 2,
-    name: "Coleta Seletiva Norte",
-    type: "Plástico e Metal",
-    address: "Rua das Flores, 500 - Zona Norte",
-    hours: "Seg-Sex 7h-19h",
-    position: { top: "20%", left: "60%" },
+    name: "UDC CÂNCIO GOMES",
+    address: "Travessa Carmem, 111 – Floresta",
+    hours: "Seg–Sex 07h–19h • Sáb/Feriados 08h–12h",
+    lat: -30.014980,
+    lng: -51.213930
   },
   {
     id: 3,
-    name: "Reciclagem Sul",
-    type: "Papel e Papelão",
-    address: "Av. Sul, 2500 - Zona Sul",
-    hours: "Seg-Sáb 8h-17h",
-    position: { top: "70%", left: "40%" },
+    name: "UDC CARVALHO DE FREITAS",
+    address: "Rua Professor Carvalho de Freitas, 1012 – Glória",
+    hours: "Seg–Sex 07h–19h • Sáb/Feriados 08h–12h",
+    lat: -30.083560,
+    lng: -51.197440
   },
   {
     id: 4,
-    name: "Ponto Verde Leste",
-    type: "Vidro e Eletrônicos",
-    address: "Rua Leste, 800 - Zona Leste",
-    hours: "Ter-Sáb 9h-18h",
-    position: { top: "50%", left: "75%" },
+    name: "UDC CENTRO",
+    address: "Av. Alberto Bins, 667 – Centro Histórico",
+    hours: "Seg–Sex 07h–19h • Sáb/Feriados 08h–12h",
+    lat: -30.024390,
+    lng: -51.230590
   },
   {
     id: 5,
-    name: "EcoParque Oeste",
-    type: "Orgânico",
-    address: "Parque Oeste, s/n - Zona Oeste",
-    hours: "Todos os dias 6h-20h",
-    position: { top: "45%", left: "15%" },
+    name: "UDC CRUZEIRO DO SUL",
+    address: "Av. Cruzeiro do Sul, 1445 – Cruzeiro do Sul",
+    hours: "Seg–Sex 08h–17h • Sáb/Feriados 08h–12h",
+    lat: -30.093415,
+    lng: -51.244620
   },
-]
+  {
+    id: 6,
+    name: "UDC FÁTIMA PINTO",
+    address: "Rua Alfredo Ferreira Rodrigues, 975 – Bom Jesus",
+    hours: "Seg–Sex 08h–17h • Sáb/Feriados 08h–12h",
+    lat: -30.039840,
+    lng: -51.157290
+  },
+  {
+    id: 7,
+    name: "UDC HUMAITÁ",
+    address: "Rua José Aloísio Filho, 780 – Humaitá",
+    hours: "Seg–Sex 08h–16h • Sáb/Feriados 08h–12h",
+    lat: -29.987850,
+    lng: -51.212710
+  },
+  {
+    id: 8,
+    name: "UDC PRINCESA ISABEL",
+    address: "Av. Ipiranga, 2765 – Santana",
+    hours: "Seg–Sex 07h–19h • Sáb/Feriados 08h–12h",
+    lat: -30.045680,
+    lng: -51.211340
+  }
+];
+function updateSideInfo(point) {
+  const infoBox = document.getElementById("mapInfo");
 
-function initMap() {
-  const mapElement = document.getElementById("ecoMap")
-
-  ecoPoints.forEach((point) => {
-    const marker = document.createElement("div")
-    marker.className = "map-marker"
-    marker.style.top = point.position.top
-    marker.style.left = point.position.left
-    marker.dataset.pointId = point.id
-
-    marker.addEventListener("click", () => showPointInfo(point.id))
-
-    mapElement.appendChild(marker)
-  })
-}
-function showPointInfo(pointId) {
-  const point = ecoPoints.find((p) => p.id === pointId)
-  const infoElement = document.getElementById("mapInfo")
-  document.querySelectorAll(".map-marker").forEach((marker) => {
-    marker.classList.remove("active")
-  })
-  const activeMarker = document.querySelector(`[data-point-id="${pointId}"]`)
-  if (activeMarker) {
-    activeMarker.classList.add("active")
+  if (!infoBox) {
+    console.warn("Div #mapInfo não encontrada!");
+    return;
   }
 
-  infoElement.innerHTML = `
-        <h3 class="map-info-title">${point.name}</h3>
-        <p class="map-info-text"><strong>Tipo:</strong> ${point.type}</p>
-        <p class="map-info-text"><strong>Endereço:</strong> ${point.address}</p>
-        <p class="map-info-text"><strong>Horário:</strong> ${point.hours}</p>
-        <span class="map-info-badge">Ponto Verificado</span>
-    `
+  infoBox.innerHTML = `
+    <h3 class="map-info-title">${point.name}</h3>
+    <p class="map-info-text"><strong>Endereço:</strong> ${point.address}</p>
+    <p class="map-info-text"><strong>Horário:</strong> ${point.hours}</p>
+    <span class="map-info-badge">Ponto Verificado</span>
+  `;
 }
-function openModal(modalId) {
-  const modal = document.getElementById(modalId)
-  if (modal) {
-    modal.classList.add("active")
-    document.body.style.overflow = "hidden"
-  }
-}
-
-function closeModal(modalId) {
-  const modal = document.getElementById(modalId)
-  if (modal) {
-    modal.classList.remove("active")
-    document.body.style.overflow = "auto"
-  }
-}
-
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") {
-    const activeModal = document.querySelector(".modal.active")
-    if (activeModal) {
-      activeModal.classList.remove("active")
-      document.body.style.overflow = "auto"
-    }
-  }
-})
-
-function handleRegister(event) {
-  event.preventDefault()
-
-  alert("Cadastro realizado com sucesso! Bem-vindo à EcoVida.")
-  closeModal("registerModal")
-  event.target.reset()
-}
-
-function handleReport(event) {
-  event.preventDefault()
-
-  alert("Reporte enviado com sucesso! Agradecemos sua contribuição para um ambiente melhor.")
-  closeModal("reportModal")
-  event.target.reset()
-}
-
-function handleEcoPoint(event) {
-  event.preventDefault()
-
-  alert("Ponto ecológico registrado com sucesso! Após verificação, ele aparecerá no mapa.")
-  closeModal("ecoPointModal")
-  event.target.reset()
-}
-
-document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-  anchor.addEventListener("click", function (e) {
-    e.preventDefault()
-    const target = document.querySelector(this.getAttribute("href"))
-    if (target) {
-      const headerOffset = 80
-      const elementPosition = target.getBoundingClientRect().top
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      })
-    }
-  })
-})
-let lastScroll = 0
-window.addEventListener("scroll", () => {
-  const header = document.querySelector(".header")
-  const currentScroll = window.pageYOffset
-
-  if (currentScroll > 100) {
-    header.style.boxShadow = "var(--shadow-md)"
-  } else {
-    header.style.boxShadow = "var(--shadow-sm)"
-  }
-
-  lastScroll = currentScroll
-})
 
 document.addEventListener("DOMContentLoaded", () => {
-  initMap()
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: "0px 0px -50px 0px",
+
+  const map = L.map("ecoMap").setView([-30.03, -51.23], 12);
+
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 19,
+    attribution: "&copy; OpenStreetMap"
+  }).addTo(map);
+
+  const bounds = [];
+
+  ecoPoints.forEach(point => {
+    const marker = L.marker([point.lat, point.lng]).addTo(map);
+
+    marker.bindPopup(`<strong>${point.name}</strong><br>${point.address}`);
+
+    marker.on("click", () => {
+      updateSideInfo(point);
+    });
+
+    bounds.push([point.lat, point.lng]);
+  });
+
+  if (bounds.length > 0) {
+    map.fitBounds(bounds, { padding: [40, 40] });
   }
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = "1"
-        entry.target.style.transform = "translateY(0)"
-      }
-    })
-  }, observerOptions)
-
-  document.querySelectorAll(".action-card, .feature-card, .stat-card").forEach((el) => {
-    el.style.opacity = "0"
-    el.style.transform = "translateY(30px)"
-    el.style.transition = "opacity 0.6s ease, transform 0.6s ease"
-    observer.observe(el)
-  })
-})
-function animateCounter(element, target, duration = 2000) {
-  let start = 0
-  const increment = target / (duration / 16)
-
-  const timer = setInterval(() => {
-    start += increment
-    if (start >= target) {
-      element.textContent = target.toLocaleString("pt-BR")
-      clearInterval(timer)
-    } else {
-      element.textContent = Math.floor(start).toLocaleString("pt-BR")
-    }
-  }, 16)
-}
-const statsObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting && !entry.target.dataset.animated) {
-        const number = entry.target.querySelector(".stat-number")
-        const target = Number.parseInt(number.textContent.replace(/\D/g, ""))
-        animateCounter(number, target)
-        entry.target.dataset.animated = "true"
-      }
-    })
-  },
-  { threshold: 0.5 },
-)
-
-document.querySelectorAll(".stat-card").forEach((card) => {
-  statsObserver.observe(card)
-})
+  updateSideInfo({
+    name: "Selecione um ponto no mapa",
+    address: "Clique em qualquer marcador para ver detalhes.",
+    hours: ""
+  });
+});

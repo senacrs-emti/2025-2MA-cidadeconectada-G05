@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EcoVida - Juntos por um Planeta Sustentável</title>
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="main.css">]
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 </head>
 <body>
     <header class="header">
@@ -16,7 +17,7 @@
                         <path d="M2 17l10 5 10-5"/>
                         <path d="M2 12l10 5 10-5"/>
                     </svg>
-                    <span class="logo-text">EcoVida</span>
+                    <span class="logo-text">WeGreenPOA</span>
                 </div>
                 <nav class="nav">
                     <a href="#home" class="nav-link">Início</a>
@@ -26,7 +27,7 @@
                 </nav>
             </div>
         </div>
-    </header>MEEU DEUS AIROLDI
+    </header>
     <section id="home" class="hero">
         <div class="hero-background"></div>
         <div class="container">
@@ -42,11 +43,11 @@
                         <div class="stat-label">Usuários Ativos</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-number">1</div>
+                        <div class="stat-number">7</div>
                         <div class="stat-label">Pontos Ecológicos</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-number">4</div>
+                        <div class="stat-number">7</div>
                         <div class="stat-label">Reportes Resolvidos</div>
                     </div>
                 </div>
@@ -138,7 +139,7 @@
                 Clique nos marcadores para ver informações sobre cada ponto de coleta
             </p>
             <div class="map-container">
-                <div id="ecoMap" class="eco-map"></div>
+                <div id="ecoMap" style="width:100%; height:450px;"></div>
                 <div id="mapInfo" class="map-info">
                     <h3 class="map-info-title">Selecione um ponto no mapa</h3>
                     <p class="map-info-text">Clique em qualquer marcador para ver mais informações</p>
@@ -157,7 +158,7 @@
                             <path d="M2 17l10 5 10-5"/>
                             <path d="M2 12l10 5 10-5"/>
                         </svg>
-                        <span class="logo-text">EcoVida</span>
+                        <span class="logo-text">WeGreenPOA</span>
                     </div>
                     <p class="footer-text">Juntos por um planeta mais sustentável e consciente.</p>
                 </div>
@@ -299,6 +300,8 @@
             </form>
         </div>
     </div>
+    <script src="main.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="main.js"></script>
 </body>
 </html>
